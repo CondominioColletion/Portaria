@@ -514,23 +514,25 @@ function limparAssinatura() {
     ctx.beginPath();
 }
 // Mostrar o botão quando o usuário descer 100px da página
+// 1. Função que vigia a rolagem da página
 window.onscroll = function() {
-    scrollFunction();
+    exibirOuEsconderBotao();
 };
 
-function scrollFunction() {
+function exibirOuEsconderBotao() {
     const btn = document.getElementById("btnVoltarTopo");
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    // Se a pessoa desceu mais de 150 pixels, o botão aparece
+    if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
         btn.style.display = "block";
     } else {
         btn.style.display = "none";
     }
 }
 
-// Função para voltar ao topo suavemente
+// 2. Função que faz a página subir quando clica no botão
 function voltarAoTopo() {
     window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: 'smooth' // Faz a subida ser suave, não um pulo seco
     });
 }
