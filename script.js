@@ -513,3 +513,24 @@ function limparAssinatura() {
     ctx.fillRect(0, 0, c.width, c.height);
     ctx.beginPath();
 }
+// Mostrar o botão quando o usuário descer 100px da página
+window.onscroll = function() {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    const btn = document.getElementById("btnVoltarTopo");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        btn.style.display = "block";
+    } else {
+        btn.style.display = "none";
+    }
+}
+
+// Função para voltar ao topo suavemente
+function voltarAoTopo() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
