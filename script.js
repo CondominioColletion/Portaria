@@ -147,11 +147,14 @@ function pararLeitor() {
 
 // ================= BUSCAR MORADORES =================
 function buscarMoradores() {
-    const num = document.getElementById('sala').value.trim();
-    if (!num) {
+    const numRaw = document.getElementById('sala').value.trim();
+    if (!numRaw) {
         document.getElementById('listaSugestoesMoradores').style.display = 'none';
         return;
     }
+    
+    // CORREÇÃO: Pega apenas os números digitados para bater com a agenda
+    const num = numRaw.replace(/\D/g, '');
     const chave = "Collection" + num;
     const listaSugestoes = document.getElementById('listaSugestoesMoradores');
     const container = document.getElementById('containerSugestoes');
@@ -232,7 +235,7 @@ document.getElementById('formRecebimento').addEventListener('submit', function (
         const nova = {
             id: Date.now(),
             ...dados,
-            new Date().toLocaleDateString('pt-BR'),
+            data: new Date().toLocaleDateString('pt-BR'), // CORRIGIDO: Adicionado 'data:'
             status: 'Aguardando retirada',
             quemRetirou: '',
             dataRetirada: '',
@@ -278,6 +281,8 @@ function excluirEncomenda(id) {
 // ================= RENDERIZAR TABELA =================
 function renderizarTabela() {
     const corpo = document.getElementById('listaCorpo');
+    if(!corpo) return; // Segurança caso o elemento não exista
+    
     const fData = document.getElementById('filtroData').value;
     const fSala = document.getElementById('filtroSala').value.toLowerCase();
     const fNF = document.getElementById('filtroNF').value.toLowerCase();
@@ -304,8 +309,7 @@ function renderizarTabela() {
     const contDetalhes = document.getElementById('resultadoConteudo');
     if (filtradas.length > 0 && (fSala || fNF || fNome)) {
         let htmlFiltro = `<div style="padding:10px; background:#f0f7ff; border-radius:8px; margin-bottom:10px; border:1px solid #bae6fd;">
-                            <strong style="color:#0369a1;">🔎 Encontrados (${filtradas.length}):</strong>
-`;
+                            <strong style="color:#0369a1;">🔎 Encontrados (${filtradas.length}):</strong>`;
         filtradas.forEach(f => {
             htmlFiltro += `<div class="item-filtro-lista" onclick="selecionarUnica(${f.id})" style="cursor:pointer; padding:5px; border-bottom:1px solid #e0e0e0; font-size:0.85em;">
                             Apto ${f.sala} - ${f.destinatario.split(' ')[0]}...
@@ -503,6 +507,7 @@ function configurarCanvas() {
 
 function limparAssinatura() {
     const c = document.getElementById('canvasAssinatura');
+    if(!c) return;
     const ctx = c.getContext('2d');
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, c.width, c.height);
