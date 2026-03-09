@@ -1,6 +1,7 @@
-/* ================= VARIÁVEIS GLOBAIS ================= */
+/* ================= VARIÁVEIS GLOBAIS (WHITE LABEL DOURADO) ================= */
 :root {
-    --primaria: #15803d; /* Verde Esmeralda */
+    --primaria: #15803d; 
+    --dourado: linear-gradient(145deg, #d4af37, #f1d592); 
     --secundaria: #64748b;
     --bg: #f8fafc;
     --card-bg: #ffffff;
@@ -12,7 +13,10 @@
 }
 
 /* ================= RESET E BASE ================= */
-* { box-sizing: border-box; transition: all 0.2s ease; }
+* { 
+    box-sizing: border-box; 
+    transition: all 0.2s ease; 
+}
 
 body { 
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; 
@@ -23,27 +27,24 @@ body {
     line-height: 1.6;
 }
 
-/* Estilização do Bloco do Título */
-.header-container { 
-    background: linear-gradient(145deg, #d4af37, #f1d592); /* Tom de Dourado com brilho */
-    padding: 20px;
+/* ================= HEADER CURSIVO E DOURADO ================= */
+header {
+    background: var(--dourado);
+    color: #000000;
+    padding: 2.5rem 1rem;
     text-align: center;
-    border-radius: 0 0 15px 15px; /* Bordas arredondadas embaixo */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Estilização da Letra "Condomínio Collection" */
-.header-container h1 {
-    font-family: 'Great Vibes', cursive; /* A fonte estilosa */
-    color: #000000; /* Preto absoluto */
-    font-size: 38px; /* Tamanho maior para destacar a cursiva */
-    margin: 0;
+header h1 { 
+    margin: 0; 
+    font-size: 3.8rem; /* Tamanho grande para a fonte cursiva */
+    font-family: 'Great Vibes', cursive; /* Fonte estilosa */
     font-weight: 400;
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.3); /* Leve brilho branco atrás do preto */
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
 }
-
-header h1 { margin: 0; font-size: 1.8rem; font-weight: 800; }
 
 /* ================= LAYOUT PRINCIPAL ================= */
 main {
@@ -74,7 +75,14 @@ main {
     border: 1px solid var(--borda);
 }
 
-h3 { margin-top: 0; font-size: 1.1rem; color: var(--secundaria); display: flex; align-items: center; gap: 8px; }
+h3 { 
+    margin-top: 0; 
+    font-size: 1.1rem; 
+    color: var(--secundaria); 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
 
 /* ================= FORMULÁRIO E INPUTS ================= */
 .campo-grupo {
@@ -93,8 +101,8 @@ input, select {
 }
 
 input:focus, select:focus {
-    border-color: var(--primaria);
-    box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.1);
+    border-color: #d4af37;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
 /* Sugestões de Moradores */
@@ -107,6 +115,7 @@ input:focus, select:focus {
     cursor: pointer;
     font-size: 0.85rem;
     font-weight: 500;
+    margin: 2px;
 }
 
 .btn-sugestao:hover {
@@ -115,28 +124,23 @@ input:focus, select:focus {
     border-color: var(--primaria);
 }
 
-/* PIN de Segurança */
-#pinConfirmacao {
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    background: #fff7ed;
-    border: 2px solid var(--alerta);
-    color: var(--texto);
-}
-
 /* ================= BOTÕES ================= */
 .btn-principal {
-    background: var(--primaria);
-    color: white;
+    background: var(--dourado); 
+    color: #000000;
     border: none;
     padding: 14px 20px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
     width: 100%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.btn-principal:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(21, 128, 61, 0.3); }
+.btn-principal:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4); 
+}
 
 .btn-secundario {
     background: var(--secundaria);
@@ -168,7 +172,7 @@ tr:hover { background-color: #f1f5f9; cursor: pointer; }
 /* ================= DASHBOARD ================= */
 #dashboard {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* Ajustado para 4 colunas (Hoje, Portaria, Entregues, Memória) */
     gap: 15px;
     margin-bottom: 20px;
 }
@@ -181,12 +185,13 @@ tr:hover { background-color: #f1f5f9; cursor: pointer; }
     border: 1px solid var(--borda);
 }
 
-.card h3 { font-size: 0.8rem; justify-content: center; margin-bottom: 5px; }
+.card h3 { font-size: 0.75rem; justify-content: center; margin-bottom: 5px; text-transform: uppercase; }
 
 .card span { font-size: 1.8rem; font-weight: 800; color: var(--primaria); }
 
 .card.aguardando span { color: var(--alerta); }
 .card.retirados span { color: var(--sucesso); }
+.card.memoria span { color: #6366f1; } /* Cor azul para o medidor de memória */
 
 /* ================= CANVAS ASSINATURA ================= */
 #canvasAssinatura {
@@ -194,12 +199,34 @@ tr:hover { background-color: #f1f5f9; cursor: pointer; }
     background: white;
     display: block;
     width: 100%;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
 }
 
-.filtros-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px;
+/* ================= BOTÃO VOLTAR AO TOPO ================= */
+#btnVoltarTopo {
+    display: none;        /* O JS mostra ao rolar */
+    position: fixed;      
+    bottom: 20px;         
+    left: 20px;           /* Canto inferior esquerdo */
+    z-index: 1000;         
+    border: none;         
+    outline: none;
+    background: var(--dourado); 
+    color: #000000;          
+    cursor: pointer;      
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;   
+    font-size: 22px;      
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#btnVoltarTopo:hover {
+    transform: scale(1.1);
 }
 
 .placeholder-text {
@@ -207,28 +234,4 @@ tr:hover { background-color: #f1f5f9; cursor: pointer; }
     text-align: center;
     padding: 40px 20px;
     font-style: italic;
-
-    /* Estilo do botão de voltar ao topo */
-#btnVoltarTopo {
-    display: none;        /* O botão começa invisível */
-    position: fixed;      /* Ele fica "travado" na tela, mesmo que você role */
-    bottom: 20px;         /* Distância de 20px do fundo da tela */
-    left: 20px;           /* Distância de 20px da lateral ESQUERDA */
-    z-index: 999;         /* Garante que ele fique por cima da tabela e das fotos */
-    border: none;         /* Sem borda quadrada feia */
-    outline: none;
-    background-color: #2e7d32; /* O verde que você usa no sistema */
-    color: white;         /* A seta será branca */
-    cursor: pointer;      /* Muda a seta do mouse para a mãozinha */
-    padding: 15px;
-    border-radius: 50%;   /* Deixa o botão redondo */
-    font-size: 20px;      /* Tamanho da seta */
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.3); /* Uma sombra para dar relevo */
-    width: 50px;
-    height: 50px;
-}
-
-/* Efeito para quando passar o mouse ou encostar o dedo */
-#btnVoltarTopo:hover {
-    background-color: #1b5e20; /* Fica um verde mais escuro */
 }
