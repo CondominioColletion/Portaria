@@ -418,17 +418,22 @@ function finalizarEntrega() {
     selecionarUnica(selecionadaId);
 }
 
-// ================= UTILITÁRIOS =================
+// ================= UTILITÁRIOS (VERSÃO FINAL COM SCROLL) =================
 function selecionarUnica(id) {
     selecionadaId = id;
     const enc = encomendas.find(e => e.id === id);
     if (!enc) return;
+    
     const cont = document.getElementById('resultadoConteudo');
     const bloco = document.getElementById('blocoConfirmarRetirada');
 
+    // Limpa campos de segurança para a nova seleção
     document.getElementById('pinConfirmacao').value = '';
     document.getElementById('pinConfirmacao').style.borderColor = "#d1d5db";
-    document.getElementById('canvasAssinatura').style.display = 'none';
+    
+    // Garante que o canvas apareça se estiver em modo de entrega
+    const canvasDoc = document.getElementById('canvasAssinatura');
+    if(canvasDoc) canvasDoc.style.display = 'block'; 
 
     let html = `<div style="font-size:0.9em;">
         <p><strong>NF:</strong> ${enc.nf} | <strong>Apto:</strong> ${enc.sala}</p>
@@ -446,7 +451,16 @@ function selecionarUnica(id) {
         bloco.style.display = 'block';
         limparAssinatura();
     }
+    
     cont.innerHTML = html + `</div>`;
+
+    // --- O PULO DO GATO: MOVE A TELA PARA ONDE O PORTEIRO PRECISA ATUAR ---
+    if (bloco) {
+        bloco.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+        });
+    }
 }
 
 function atualizarDashboard() {
@@ -482,7 +496,6 @@ function exportarCSV() {
     link.download = "encomendas_collection.csv";
     link.click();
 }
-
 // ================= CANVAS (VERSÃO OTIMIZADA PARA TOQUE) =================
 let desenhando = false;
 
