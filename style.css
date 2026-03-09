@@ -216,23 +216,29 @@ tr:hover {
     align-items: center; 
     justify-content: center;
 }
-/* Garante que a linha toda da tabela aceite o clique */
+/* ================= CORREÇÃO CLIQUE NA TABELA ================= */
+
+/* 1. Garante que a linha aceite o clique e mostre a "mãozinha" */
 #listaCorpo tr {
     cursor: pointer !important;
-    user-select: none;
     position: relative;
+    transition: background 0.2s;
 }
 
+/* 2. Destaque ao passar o mouse */
 #listaCorpo tr:hover {
-    background-color: #fefce8 !important; /* Destaque leve em dourado ao passar o mouse */
+    background-color: #fefce8 !important; 
 }
 
-/* Impede que o texto ou o status bloqueiem o clique da linha */
+/* 3. IMPORTANTE: Reativa o clique em todas as células */
 #listaCorpo td {
-    pointer-events: none; 
+    pointer-events: auto !important; /* Mude de none para auto */
+    padding: 12px;
 }
 
-/* Mas permite que o botão de apagar (lixeira) continue funcionando sozinho */
-#listaCorpo td button, #listaCorpo td .btn-perigo {
+/* 4. Garante que os botões (lixeira/editar) fiquem "por cima" para não dar conflito */
+#listaCorpo td button {
+    position: relative;
+    z-index: 10;
     pointer-events: auto;
 }
