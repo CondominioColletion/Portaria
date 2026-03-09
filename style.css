@@ -2,6 +2,7 @@
 :root {
     --primaria: #15803d; 
     --dourado: linear-gradient(145deg, #d4af37, #f1d592); 
+    --dourado-solido: #d4af37;
     --secundaria: #64748b;
     --bg: #f8fafc;
     --card-bg: #ffffff;
@@ -40,8 +41,8 @@ header {
 
 header h1 { 
     margin: 0; 
-    font-size: 3.8rem; /* Tamanho grande para a fonte cursiva */
-    font-family: 'Great Vibes', cursive; /* Fonte estilosa */
+    font-size: 3.8rem; 
+    font-family: 'Great Vibes', cursive; 
     font-weight: 400;
     text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
 }
@@ -85,12 +86,6 @@ h3 {
 }
 
 /* ================= FORMULÁRIO E INPUTS ================= */
-.campo-grupo {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-
 input, select {
     width: 100%;
     padding: 12px;
@@ -98,10 +93,11 @@ input, select {
     border-radius: 8px;
     font-size: 0.95rem;
     outline: none;
+    margin-bottom: 12px;
 }
 
 input:focus, select:focus {
-    border-color: #d4af37;
+    border-color: var(--dourado-solido);
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
@@ -119,12 +115,14 @@ input:focus, select:focus {
 }
 
 .btn-sugestao:hover {
-    background: var(--primaria);
-    color: white;
-    border-color: var(--primaria);
+    background: var(--dourado);
+    color: #000;
+    border-color: var(--dourado-solido);
 }
 
-/* ================= BOTÕES ================= */
+/* ================= BOTÕES (NOVA HIERARQUIA) ================= */
+
+/* Botão Principal: Salvar, Finalizar, Notificar */
 .btn-principal {
     background: var(--dourado); 
     color: #000000;
@@ -135,6 +133,7 @@ input:focus, select:focus {
     font-weight: bold;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-size: 1rem;
 }
 
 .btn-principal:hover { 
@@ -142,14 +141,77 @@ input:focus, select:focus {
     box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4); 
 }
 
+/* Botão Secundário: Câmera, Cancelar, Exportar */
 .btn-secundario {
-    background: var(--secundaria);
+    background-color: var(--secundaria);
     color: white;
     border: none;
-    padding: 10px;
+    padding: 10px 16px;
     border-radius: 8px;
     cursor: pointer;
+    font-weight: 500;
 }
+
+.btn-secundario:hover {
+    background-color: #475569;
+}
+
+/* Botão de Perigo: Excluir, Limpar Tudo */
+.btn-perigo {
+    background-color: transparent;
+    color: var(--perigo);
+    border: 1px solid var(--perigo);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.btn-perigo:hover {
+    background-color: var(--perigo);
+    color: white;
+}
+
+/* Botão Limpar Assinatura (Texto discreto) */
+.btn-limpar-assinatura {
+    background: transparent;
+    border: none;
+    color: var(--secundaria);
+    cursor: pointer;
+    font-size: 0.75rem;
+    width: 100%;
+    margin: 5px 0;
+    text-decoration: underline;
+}
+
+.btn-limpar-assinatura:hover {
+    color: var(--perigo);
+}
+
+/* ================= DASHBOARD ================= */
+#dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid var(--borda);
+}
+
+.card h3 { font-size: 0.75rem; color: var(--secundaria); margin-bottom: 5px; text-transform: uppercase; }
+
+.card span { font-size: 1.8rem; font-weight: 800; color: var(--primaria); }
+
+.card.aguardando span { color: var(--alerta); }
+.card.retirados span { color: var(--sucesso); }
+.card.memoria span { color: #6366f1; }
 
 /* ================= TABELA ================= */
 .table-responsive { overflow-x: auto; }
@@ -169,30 +231,6 @@ td { padding: 12px; border-bottom: 1px solid var(--borda); font-size: 0.9rem; }
 
 tr:hover { background-color: #f1f5f9; cursor: pointer; }
 
-/* ================= DASHBOARD ================= */
-#dashboard {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Ajustado para 4 colunas (Hoje, Portaria, Entregues, Memória) */
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.card {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-    border: 1px solid var(--borda);
-}
-
-.card h3 { font-size: 0.75rem; justify-content: center; margin-bottom: 5px; text-transform: uppercase; }
-
-.card span { font-size: 1.8rem; font-weight: 800; color: var(--primaria); }
-
-.card.aguardando span { color: var(--alerta); }
-.card.retirados span { color: var(--sucesso); }
-.card.memoria span { color: #6366f1; } /* Cor azul para o medidor de memória */
-
 /* ================= CANVAS ASSINATURA ================= */
 #canvasAssinatura {
     touch-action: none;
@@ -205,10 +243,10 @@ tr:hover { background-color: #f1f5f9; cursor: pointer; }
 
 /* ================= BOTÃO VOLTAR AO TOPO ================= */
 #btnVoltarTopo {
-    display: none;        /* O JS mostra ao rolar */
+    display: none; 
     position: fixed;      
     bottom: 20px;         
-    left: 20px;           /* Canto inferior esquerdo */
+    left: 20px;           
     z-index: 1000;         
     border: none;         
     outline: none;
