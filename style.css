@@ -216,3 +216,23 @@ tr:hover {
     align-items: center; 
     justify-content: center;
 }
+/* Garante que a linha toda da tabela aceite o clique */
+#listaCorpo tr {
+    cursor: pointer !important;
+    user-select: none;
+    position: relative;
+}
+
+#listaCorpo tr:hover {
+    background-color: #fefce8 !important; /* Destaque leve em dourado ao passar o mouse */
+}
+
+/* Impede que o texto ou o status bloqueiem o clique da linha */
+#listaCorpo td {
+    pointer-events: none; 
+}
+
+/* Mas permite que o botão de apagar (lixeira) continue funcionando sozinho */
+#listaCorpo td button, #listaCorpo td .btn-perigo {
+    pointer-events: auto;
+}
