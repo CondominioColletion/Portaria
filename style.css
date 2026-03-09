@@ -1,4 +1,4 @@
-/* ================= VARIÁVEIS GLOBAIS (WHITE LABEL DOURADO) ================= */
+/* ================= VARIÁVEIS GLOBAIS (CONDOMÍNIO COLLECTION) ================= */
 :root {
     --primaria: #15803d; 
     --dourado: linear-gradient(145deg, #d4af37, #f1d592); 
@@ -9,7 +9,7 @@
     --texto: #1e293b;
     --borda: #e2e8f0;
     --sucesso: #22c55e;
-    --alerta: #f59e0b;
+    --alerta: #b59410; /* Dourado para alertas/aguardando */
     --perigo: #dc2626;
 }
 
@@ -42,7 +42,7 @@ header {
 header h1 { 
     margin: 0; 
     font-size: 3.8rem; 
-    font-family: 'Great Vibes', cursive; 
+    font-family: 'Great Vibes', cursive; /* Requer link Google Fonts no HTML */
     font-weight: 400;
     text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
 }
@@ -101,6 +101,47 @@ input:focus, select:focus {
     box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
 }
 
+/* ================= BOTÕES UNIFICADOS (DOURADO E PRETO) ================= */
+
+/* Botão Principal, Câmera, Filtros e Exportar */
+.btn-principal, .btn-secundario, .btn-filtro, .btn-exportar, #btnSalvar {
+    background: var(--dourado) !important; 
+    color: #000000 !important;
+    border: none !important;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-principal:hover, .btn-secundario:hover, .btn-filtro:hover, .btn-exportar:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4) !important; 
+}
+
+/* Botão de Perigo (Excluir) */
+.btn-perigo {
+    background-color: transparent;
+    color: var(--perigo);
+    border: 1px solid var(--perigo);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-perigo:hover {
+    background-color: var(--perigo);
+    color: white;
+}
+
 /* Sugestões de Moradores */
 .btn-sugestao {
     background: #f1f5f9;
@@ -110,83 +151,35 @@ input:focus, select:focus {
     border-radius: 20px;
     cursor: pointer;
     font-size: 0.85rem;
-    font-weight: 500;
     margin: 2px;
 }
 
 .btn-sugestao:hover {
     background: var(--dourado);
     color: #000;
-    border-color: var(--dourado-solido);
 }
 
-/* ================= BOTÕES (NOVA HIERARQUIA) ================= */
+/* ================= TABELA E STATUS ================= */
+.table-responsive { overflow-x: auto; }
 
-/* Botão Principal: Salvar, Finalizar, Notificar */
-.btn-principal {
-    background: var(--dourado); 
-    color: #000000;
-    border: none;
-    padding: 14px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 100%;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    font-size: 1rem;
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+
+th { 
+    text-align: left; padding: 12px; background: #f8fafc; 
+    color: var(--secundaria); font-size: 0.85rem; text-transform: uppercase;
 }
 
-.btn-principal:hover { 
-    transform: translateY(-2px); 
-    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4); 
+td { padding: 12px; border-bottom: 1px solid var(--borda); font-size: 0.9rem; }
+
+/* Cores de Status Solicitadas */
+.status-aguardando {
+    color: #b59410 !important; /* Dourado escuro */
+    font-weight: 800 !important;
 }
 
-/* Botão Secundário: Câmera, Cancelar, Exportar */
-.btn-secundario {
-    background-color: var(--secundaria);
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 500;
-}
-
-.btn-secundario:hover {
-    background-color: #475569;
-}
-
-/* Botão de Perigo: Excluir, Limpar Tudo */
-.btn-perigo {
-    background-color: transparent;
-    color: var(--perigo);
-    border: 1px solid var(--perigo);
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.btn-perigo:hover {
-    background-color: var(--perigo);
-    color: white;
-}
-
-/* Botão Limpar Assinatura (Texto discreto) */
-.btn-limpar-assinatura {
-    background: transparent;
-    border: none;
-    color: var(--secundaria);
-    cursor: pointer;
-    font-size: 0.75rem;
-    width: 100%;
-    margin: 5px 0;
-    text-decoration: underline;
-}
-
-.btn-limpar-assinatura:hover {
-    color: var(--perigo);
+.status-retirado {
+    color: #000000 !important; /* Preto */
+    font-weight: 800 !important;
 }
 
 /* ================= DASHBOARD ================= */
@@ -205,61 +198,39 @@ input:focus, select:focus {
     border: 1px solid var(--borda);
 }
 
-.card h3 { font-size: 0.75rem; color: var(--secundaria); margin-bottom: 5px; text-transform: uppercase; }
-
 .card span { font-size: 1.8rem; font-weight: 800; color: var(--primaria); }
 
-.card.aguardando span { color: var(--alerta); }
-.card.retirados span { color: var(--sucesso); }
+/* Cores do Dash seguindo a regra */
+.card.aguardando span { color: #b59410; } 
+.card.retirados span { color: #000000; }
 .card.memoria span { color: #6366f1; }
 
-/* ================= TABELA ================= */
-.table-responsive { overflow-x: auto; }
-
-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-
-th { 
-    text-align: left; 
-    padding: 12px; 
-    background: #f8fafc; 
-    color: var(--secundaria); 
-    font-size: 0.85rem;
-    text-transform: uppercase;
-}
-
-td { padding: 12px; border-bottom: 1px solid var(--borda); font-size: 0.9rem; }
-
-tr:hover { background-color: #f1f5f9; cursor: pointer; }
-
-/* ================= CANVAS ASSINATURA ================= */
+/* ================= CANVAS E VOLTAR AO TOPO ================= */
 #canvasAssinatura {
-    touch-action: none;
     background: white;
-    display: block;
     width: 100%;
     border: 1px solid var(--borda);
     border-radius: 8px;
+    touch-action: none;
 }
 
-/* ================= BOTÃO VOLTAR AO TOPO ================= */
 #btnVoltarTopo {
     display: none; 
-    position: fixed;      
-    bottom: 20px;         
-    left: 20px;           
+    position: fixed; 
+    bottom: 20px; 
+    left: 20px; /* Posicionado na esquerda conforme pedido */
     z-index: 1000;         
-    border: none;         
-    outline: none;
+    border: none; 
     background: var(--dourado); 
     color: #000000;          
+    width: 55px; 
+    height: 55px; 
+    border-radius: 50%; 
     cursor: pointer;      
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;   
-    font-size: 22px;      
+    font-size: 22px; 
     box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
+    display: flex; 
+    align-items: center; 
     justify-content: center;
 }
 
