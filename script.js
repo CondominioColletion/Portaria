@@ -278,7 +278,7 @@ function excluirEncomenda(id) {
     }
 }
 
-// ================= RENDERIZAR TABELA (RESTAURADO COM FILTRO LATERAL) =================
+// ================= RENDERIZAR TABELA (VERSÃO FINAL ATUALIZADA) =================
 function renderizarTabela() {
     const corpo = document.getElementById('listaCorpo');
     if(!corpo) return; 
@@ -300,14 +300,18 @@ function renderizarTabela() {
         return bData && bSala && bNF && bNome && bStatus;
     });
 
+    // --- MELHORIA 1: ORDENAÇÃO POR DATA (CRESCENTE) ---
+    // Isso garante que as encomendas mais antigas apareçam no topo
     filtradas.sort((a, b) => {
-        const nA = parseInt(a.sala.toString().replace(/\D/g, '')) || 0;
-        const nB = parseInt(b.sala.toString().replace(/\D/g, '')) || 0;
-        return nA - nB;
+        const dataA = new Date(a.data.split('/').reverse().join('-'));
+        const dataB = new Date(b.data.split('/').reverse().join('-'));
+        return dataA - dataB;
     });
 
-    // --- VOLTANDO COM O RESULTADO NO DETALHES (O QUE VOCÊ PEDIU) ---
+    // --- MELHORIA 2: RESULTADO NO DETALHES (FILTRO ATIVO) ---
     const contDetalhes = document.getElementById('resultadoConteudo');
+    
+    // Se houver texto nos filtros, mostra a lista rápida na direita
     if (filtradas.length > 0 && (fSala || fNF || fNome)) {
         let htmlFiltro = `<div style="padding:10px; background:#fffcf0; border-radius:8px; margin-bottom:10px; border:1px solid #d4af37;">
                             <strong style="color:#b59410;">🔎 Encontrados (${filtradas.length}):</strong>`;
@@ -320,15 +324,17 @@ function renderizarTabela() {
         htmlFiltro += `</div>`;
         contDetalhes.innerHTML = htmlFiltro + `<p style="font-size:0.8em; color:#999; text-align:center;">Clique no nome acima para finalizar a entrega.</p>`;
     } else if (!fSala && !fNF && !fNome) {
+        // Se os filtros estiverem vazios, volta ao texto padrão
         contDetalhes.innerHTML = `<p class="placeholder-text">Selecione uma encomenda ou use os filtros.</p>`;
     }
 
-    // Renderização da tabela principal
+    // --- RENDERIZAÇÃO DA TABELA PRINCIPAL ---
     filtradas.forEach(enc => {
         const tr = document.createElement('tr');
+        
+        // MELHORIA 3: TODO ITEM DA LISTA É CLICÁVEL
         tr.onclick = () => selecionarUnica(enc.id);
         
-        // Cores conforme a foto e sua solicitação
         const corTextoStatus = enc.status === 'Retirado' ? '#000000' : '#b59410';
 
         tr.innerHTML = `
@@ -345,7 +351,6 @@ function renderizarTabela() {
         corpo.appendChild(tr);
     });
 }
-
 // ================= VALIDAÇÃO DE PIN INSTANTÂNEA =================
 function validarPinInstantaneo(valor) {
     if (!selecionadaId) return;
