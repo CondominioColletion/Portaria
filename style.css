@@ -242,3 +242,25 @@ tr:hover {
     z-index: 10;
     pointer-events: auto;
 }
+/* ================= BOTÃO DA CÂMERA (FOTO) ================= */
+/* Se o seu botão usa uma tag <button> ou uma classe específica */
+button[onclick*="alternarCamera"], 
+button[onclick*="tirarFoto"],
+.btn-camera {
+    background: var(--dourado) !important;
+    color: #000000 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 10px 15px !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button[onclick*="alternarCamera"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4) !important;
+}
