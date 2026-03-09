@@ -298,3 +298,11 @@ button[onclick*="Camera"]:hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4) !important;
 }
+/* Garante que o dedo assine sem arrastar a página para cima ou para baixo */
+#canvasAssinatura {
+    touch-action: none; 
+    cursor: crosshair;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    display: block;
+}
