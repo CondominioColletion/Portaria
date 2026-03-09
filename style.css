@@ -242,25 +242,27 @@ tr:hover {
     z-index: 10;
     pointer-events: auto;
 }
-/* ================= BOTÃO DA CÂMERA (FOTO) ================= */
-/* Se o seu botão usa uma tag <button> ou uma classe específica */
-button[onclick*="alternarCamera"], 
-button[onclick*="tirarFoto"],
-.btn-camera {
+/* FORÇAR COR DOURADA NO BOTÃO DE FOTO/CÂMERA */
+button[onclick*="Foto"], 
+button[onclick*="Camera"],
+button[onclick*="tirar"],
+.btn-foto, .btn-camera {
     background: var(--dourado) !important;
     color: #000000 !important;
     border: none !important;
-    border-radius: 8px !important;
-    padding: 10px 15px !important;
-    cursor: pointer !important;
     font-weight: bold !important;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    cursor: pointer !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-button[onclick*="alternarCamera"]:hover {
-    transform: translateY(-2px);
+/* Efeito ao passar o mouse para ficar igual aos outros */
+button[onclick*="Foto"]:hover, 
+button[onclick*="Camera"]:hover {
+    transform: translateY(-2px) !important;
     box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4) !important;
 }
