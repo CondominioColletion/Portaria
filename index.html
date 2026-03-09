@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/html5-qrcode"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&family=Montserrat:wght@400&display=swap" rel="stylesheet">
+</head>
 <body>
 
 <header>
@@ -72,6 +73,30 @@
             </div>
         </div>
 
+        <div id="resultadoBusca" class="container">
+            <h3>📌 Detalhes / Busca Rápida</h3>
+            <div id="resultadoConteudo"><p class="placeholder-text">Selecione uma encomenda ou use os filtros.</p></div>
+        </div>
+
+        <div id="blocoConfirmarRetirada" class="container" style="display:none; border-top: 3px solid #b59410;">
+            <h3 style="color:#b59410;">✅ Confirmar Entrega</h3>
+            <input type="text" id="nomeRec" placeholder="Quem retirou?" style="width:100%; margin-bottom:10px;">
+            
+            <div style="position: relative;">
+                <input type="password" id="pinConfirmacao" placeholder="PIN do Apto" maxlength="4" inputmode="numeric" style="width:100%; text-align: center; font-size: 1.2em; letter-spacing: 5px; margin-bottom:10px;">
+            </div>
+
+            <div id="containerAssinatura" style="margin-bottom: 10px;">
+                <p style="font-size: 0.75em; color: #666; margin-bottom: 5px;">Assine abaixo:</p>
+                <canvas id="canvasAssinatura" width="340" height="150" style="border: 1px solid #ccc; width: 100%; touch-action: none;"></canvas>
+            </div>
+
+            <div style="display: flex; gap: 5px; margin-top:10px;">
+                <button onclick="limparAssinatura()" class="btn-secundario" style="flex: 1;">Limpar</button>
+                <button onclick="finalizarEntrega()" id="btnFinalizar" class="btn-principal" style="flex: 2;">Finalizar</button>
+            </div>
+        </div>
+
         <div id="dashboard">
             <div class="card"><h3>Hoje</h3><span id="dashTotal">0</span></div>
             <div class="card aguardando"><h3>Pendentes</h3><span id="dashAguardando">0</span></div>
@@ -86,32 +111,6 @@
                     </thead>
                     <tbody id="listaCorpo"></tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-
-    <div class="lateral-acoes">
-        <div id="resultadoBusca" class="container">
-            <h3>📌 Detalhes / Busca Rápida</h3>
-            <div id="resultadoConteudo"><p class="placeholder-text">Selecione uma encomenda ou use os filtros.</p></div>
-        </div>
-
-        <div id="blocoConfirmarRetirada" class="container" style="display:none;">
-            <h3 style="color:#b59410;">✅ Confirmar Entrega</h3>
-            <input type="text" id="nomeRec" placeholder="Quem retirou?" style="width:100%; margin-bottom:10px;">
-            
-            <div style="position: relative;">
-                <input type="password" id="pinConfirmacao" placeholder="PIN do Apto" maxlength="4" inputmode="numeric" style="width:100%; text-align: center; font-size: 1.2em; letter-spacing: 5px; margin-bottom:10px;">
-            </div>
-
-            <div id="containerAssinatura" style="margin-bottom: 10px;">
-                <p style="font-size: 0.75em; color: #666; margin-bottom: 5px;">Assine abaixo:</p>
-                <canvas id="canvasAssinatura" width="340" height="150"></canvas>
-            </div>
-
-            <div style="display: flex; gap: 5px; margin-top:10px;">
-                <button onclick="limparAssinatura()" class="btn-secundario" style="flex: 1;">Limpar</button>
-                <button onclick="finalizarEntrega()" id="btnFinalizar" class="btn-principal" style="flex: 2;">Finalizar</button>
             </div>
         </div>
     </div>
