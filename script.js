@@ -300,12 +300,21 @@ function renderizarTabela() {
         return bData && bSala && bNF && bNome && bStatus;
     });
 
-    // --- MELHORIA 1: ORDENAÇÃO POR DATA (CRESCENTE) ---
-    // Isso garante que as encomendas mais antigas apareçam no topo
+    // 2. ORDENAÇÃO: Primeiro por DATA, depois por APARTAMENTO (Crescente)
     filtradas.sort((a, b) => {
+        // Primeiro comparamos as datas
         const dataA = new Date(a.data.split('/').reverse().join('-'));
         const dataB = new Date(b.data.split('/').reverse().join('-'));
-        return dataA - dataB;
+        
+        if (dataA - dataB !== 0) {
+            return dataA - dataB; // Se as datas forem diferentes, ordena por data
+        }
+
+        // Se a data for a mesma, ordena pelo número do APARTAMENTO
+        // Usamos o replace(/\D/g, '') para garantir que trate como número mesmo se tiver letras
+        const numA = parseInt(a.sala.toString().replace(/\D/g, '')) || 0;
+        const numB = parseInt(b.sala.toString().replace(/\D/g, '')) || 0;
+        return numA - numB;
     });
 
     // --- MELHORIA 2: RESULTADO NO DETALHES (FILTRO ATIVO) ---
