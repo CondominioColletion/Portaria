@@ -6,14 +6,15 @@
     <title>Condomínio Collection - Gestão de Encomendas</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/html5-qrcode"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <header>
-    <div class="header-container">
-    <h1>Condomínio Collection</h1>
-</div>
+    <div class="logo-container">
+        <div class="logo-collection">Collection</div>
+        <div class="logo-sao-caetano">SÃO CAETANO</div>
+    </div>
 </header>
 
 <main>
@@ -24,31 +25,31 @@
                 <input type="hidden" id="editId">
                 
                 <div class="campo-grupo">
-                    <div style="display: flex; gap: 5px; flex: 2;">
-                        <input type="text" id="notaFiscal" required placeholder="Nota Fiscal (NF)" style="flex: 1;">
-                        <button type="button" id="btnAbrirCamera" onclick="alternarCamera()" title="Abrir Câmera" style="background: #15803d; color: white; border: none; border-radius: 4px; padding: 0 15px; cursor: pointer;">📷</button>
+                    <div style="display: flex; gap: 8px; flex: 2;">
+                        <input type="text" id="notaFiscal" required placeholder="Nota Fiscal (NF)" style="flex: 1; margin-bottom: 0;">
+                        <button type="button" id="btnAbrirCamera" onclick="alternarCamera()" class="btn-secundario" title="Abrir Câmera" style="width: 60px;">📷</button>
                     </div>
                     <input type="number" id="sala" required placeholder="Apto" oninput="buscarMoradores()" style="flex: 1;" pattern="[0-9]*">
                 </div>
 
-                <div id="area-scanner" style="display:none; margin: 10px 0; border: 2px solid #15803d; border-radius: 8px; overflow: hidden; position: relative;">
+                <div id="area-scanner" style="display:none; margin: 10px 0; border: 2px solid var(--dourado-solido); border-radius: 8px; overflow: hidden; position: relative;">
                     <div id="reader" style="width: 100%;"></div>
-                    <button type="button" onclick="pararLeitor()" style="width: 100%; padding: 10px; background: #dc2626; color: white; border: none; cursor: pointer; font-weight: bold;">❌ Fechar Câmera e Digitar Manual</button>
+                    <button type="button" onclick="pararLeitor()" style="width: 100%; padding: 10px; background: #dc2626; color: white; border: none; cursor: pointer; font-weight: bold;">❌ Fechar Câmera</button>
                 </div>
 
-                <div id="listaSugestoesMoradores" style="display:none; margin-bottom: 15px; padding: 10px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+                <div id="listaSugestoesMoradores" style="display:none; margin-bottom: 15px; padding: 10px; background: #f8fafc; border: 1px solid var(--borda); border-radius: 8px;">
                     <p style="font-size: 0.8em; font-weight: bold; color: #64748b; margin-bottom: 8px;">Moradores encontrados no apto:</p>
                     <div id="containerSugestoes" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
                 </div>
 
                 <div class="campo-grupo">
                     <input type="text" id="destinatario" required placeholder="Nome do Destinatário">
-                    <input type="tel" id="telefone" required placeholder="WhatsApp" pattern="[0-9]{10,15}" title="Digite um número de telefone válido.">
+                    <input type="tel" id="telefone" required placeholder="WhatsApp" pattern="[0-9]{10,15}">
                 </div>
                 
                 <div style="display: flex; gap: 10px;">
                     <button type="submit" id="btnSalvar" class="btn-principal">Salvar e Notificar</button>
-                    <button type="button" id="btnCancelarEdit" class="btn-secundario" style="display:none; background:#666;" onclick="cancelarEdicao()">Cancelar</button>
+                    <button type="button" id="btnCancelarEdit" class="btn-perigo" style="display:none;" onclick="cancelarEdicao()">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -68,7 +69,7 @@
             </div>
             <div style="display: flex; gap: 10px; margin-top: 15px;">
                 <button onclick="limparFiltros()" class="btn-secundario" style="flex: 1;">Limpar Filtros</button>
-                <button onclick="exportarCSV()" class="btn-principal" style="flex: 1; background: #075e54;">Exportar CSV (Excel)</button>
+                <button onclick="exportarCSV()" class="btn-exportar" style="flex: 1;">Exportar CSV (Excel)</button>
             </div>
         </div>
 
@@ -97,21 +98,21 @@
         </div>
 
         <div id="blocoConfirmarRetirada" class="container" style="display:none;">
-            <h3 style="color:#15803d;">✅ Confirmar Entrega</h3>
+            <h3 style="color:#b59410;">✅ Confirmar Entrega</h3>
             <input type="text" id="nomeRec" placeholder="Quem retirou?" style="width:100%; margin-bottom:10px;">
             
             <div style="position: relative;">
-                <input type="password" id="pinConfirmacao" placeholder="PIN do Apto" maxlength="4" inputmode="numeric" autocomplete="one-time-code" style="width:100%; text-align: center; font-size: 1.2em; letter-spacing: 5px; margin-bottom:10px; border: 2px solid #d1d5db; transition: 0.3s;">
+                <input type="password" id="pinConfirmacao" placeholder="PIN do Apto" maxlength="4" inputmode="numeric" style="width:100%; text-align: center; font-size: 1.2em; letter-spacing: 5px; margin-bottom:10px;">
             </div>
 
             <div id="containerAssinatura" style="margin-bottom: 10px;">
                 <p style="font-size: 0.75em; color: #666; margin-bottom: 5px;">Assine abaixo:</p>
-                <canvas id="canvasAssinatura" width="340" height="150" style="border:1px solid #ccc; width:100%; background: white; border-radius: 4px; display: none;"></canvas>
+                <canvas id="canvasAssinatura" width="340" height="150"></canvas>
             </div>
 
             <div style="display: flex; gap: 5px; margin-top:10px;">
                 <button onclick="limparAssinatura()" class="btn-secundario" style="flex: 1;">Limpar</button>
-                <button onclick="finalizarEntrega()" id="btnFinalizar" class="btn-principal" style="flex: 2;" disabled>Finalizar</button>
+                <button onclick="finalizarEntrega()" id="btnFinalizar" class="btn-principal" style="flex: 2;">Finalizar</button>
             </div>
         </div>
     </div>
