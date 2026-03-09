@@ -388,7 +388,7 @@ function finalizarEntrega() {
     encomendas[index].status = 'Retirado';
     encomendas[index].quemRetirou = nomeRec;
     encomendas[index].dataRetirada = new Date().toLocaleString('pt-BR');
-    encomendas[index].assinatura = tempCanvas.toDataURL('image/jpeg', 1.0);
+    encomendas[index].assinatura = tempCanvas.toDataURL('image/jpeg', 0.5);
 
     salvarEAtualizar();
     enviarZap(encomendas[index], 'retirada');
@@ -535,4 +535,13 @@ function voltarAoTopo() {
         top: 0,
         behavior: 'smooth' // Faz a subida ser suave, não um pulo seco
     });
+}
+function verificarEspaco() {
+    let total = 0;
+    for (let x in localStorage) {
+        if (localStorage.hasOwnProperty(x)) {
+            total += (localStorage[x].length * 2) / 1024 / 1024; // Tamanho em MB
+        }
+    }
+    console.log("Espaço usado: " + total.toFixed(2) + " MB de 5.00 MB");
 }
