@@ -483,13 +483,15 @@ function exportarCSV() {
     link.click();
 }
 
-// ================= CANVAS =================
+// ================= CANVAS (VERSÃO OTIMIZADA PARA TOQUE) =================
 let desenhando = false;
+
 function configurarCanvas() {
     const canvas = document.getElementById('canvasAssinatura');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
+    // Inicializa o fundo branco para evitar transparência no salvamento
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -497,7 +499,12 @@ function configurarCanvas() {
         const rect = canvas.getBoundingClientRect();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        return { x: clientX - rect.left, y: clientY - rect.top };
+        
+        // Ajuste de precisão: compensa a diferença entre o tamanho real e o exibido na tela
+        return { 
+            x: (clientX - rect.left) * (canvas.width / rect.width), 
+            y: (clientY - rect.top) * (canvas.height / rect.height) 
+        };
     };
 
     const iniciar = (e) => {
@@ -505,26 +512,41 @@ function configurarCanvas() {
         const pos = getPos(e);
         ctx.beginPath();
         ctx.moveTo(pos.x, pos.y);
-        if (e.type.startsWith('touch')) e.preventDefault();
+        
+        // Impede o scroll da página ao começar a assinar
+        if (e.cancelable) e.preventDefault();
     };
 
     const mover = (e) => {
         if (!desenhando) return;
         const pos = getPos(e);
+        
         ctx.lineTo(pos.x, pos.y);
-        ctx.strokeStyle = "black";
+        ctx.strokeStyle = "#454545"; // Cor cinza grafite da logo
         ctx.lineWidth = 3;
         ctx.lineCap = "round";
+        ctx.lineJoin = "round"; // Suaviza as curvas da assinatura
         ctx.stroke();
-        if (e.type.startsWith('touch')) e.preventDefault();
+        
+        // Impede o scroll da página durante o movimento
+        if (e.cancelable) e.preventDefault();
     };
 
+    const parar = () => {
+        desenhando = false;
+        // Se você tiver uma função que valida se assinou para liberar o botão, chame-a aqui
+        if (typeof verificarAssinatura === "function") verificarAssinatura();
+    };
+
+    // Eventos de Mouse
     canvas.addEventListener('mousedown', iniciar);
+    window.addEventListener('mousemove', mover);
+    window.addEventListener('mouseup', parar);
+
+    // Eventos de Touch (Celular/Tablet)
     canvas.addEventListener('touchstart', iniciar, { passive: false });
-    canvas.addEventListener('mousemove', mover);
     canvas.addEventListener('touchmove', mover, { passive: false });
-    window.addEventListener('mouseup', () => desenhando = false);
-    window.addEventListener('touchend', () => desenhando = false);
+    canvas.addEventListener('touchend', parar);
 }
 
 function limparAssinatura() {
@@ -535,15 +557,16 @@ function limparAssinatura() {
     ctx.fillRect(0, 0, c.width, c.height);
     ctx.beginPath();
 }
-// Mostrar o botão quando o usuário descer 100px da página
-// 1. Função que vigia a rolagem da página
+
+// --- Funções de Utilidade (Scroll e Monitoramento) ---
+
 window.onscroll = function() {
     exibirOuEsconderBotao();
 };
 
 function exibirOuEsconderBotao() {
     const btn = document.getElementById("btnVoltarTopo");
-    // Se a pessoa desceu mais de 150 pixels, o botão aparece
+    if (!btn) return;
     if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
         btn.style.display = "block";
     } else {
@@ -551,18 +574,18 @@ function exibirOuEsconderBotao() {
     }
 }
 
-// 2. Função que faz a página subir quando clica no botão
 function voltarAoTopo() {
     window.scrollTo({
         top: 0,
-        behavior: 'smooth' // Faz a subida ser suave, não um pulo seco
+        behavior: 'smooth'
     });
 }
+
 function verificarEspaco() {
     let total = 0;
     for (let x in localStorage) {
         if (localStorage.hasOwnProperty(x)) {
-            total += (localStorage[x].length * 2) / 1024 / 1024; // Tamanho em MB
+            total += (localStorage[x].length * 2) / 1024 / 1024; 
         }
     }
     console.log("Espaço usado: " + total.toFixed(2) + " MB de 5.00 MB");
