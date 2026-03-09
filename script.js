@@ -278,10 +278,10 @@ function excluirEncomenda(id) {
     }
 }
 
-// ================= RENDERIZAR TABELA =================
+// ================= RENDERIZAR TABELA (REVISADO) =================
 function renderizarTabela() {
     const corpo = document.getElementById('listaCorpo');
-    if(!corpo) return; // Segurança caso o elemento não exista
+    if(!corpo) return; 
     
     const fData = document.getElementById('filtroData').value;
     const fSala = document.getElementById('filtroSala').value.toLowerCase();
@@ -291,6 +291,7 @@ function renderizarTabela() {
 
     corpo.innerHTML = '';
 
+    // 1. Filtragem
     let filtradas = encomendas.filter(e => {
         const bData = !fData || e.data.split('/').reverse().join('-') === fData;
         const bSala = !fSala || e.sala.toString().toLowerCase().includes(fSala);
@@ -300,38 +301,33 @@ function renderizarTabela() {
         return bData && bSala && bNF && bNome && bStatus;
     });
 
+    // 2. Ordenação
     filtradas.sort((a, b) => {
         const nA = parseInt(a.sala.toString().replace(/\D/g, '')) || 0;
         const nB = parseInt(b.sala.toString().replace(/\D/g, '')) || 0;
         return nA - nB;
     });
 
-    const contDetalhes = document.getElementById('resultadoConteudo');
-    if (filtradas.length > 0 && (fSala || fNF || fNome)) {
-        let htmlFiltro = `<div style="padding:10px; background:#f0f7ff; border-radius:8px; margin-bottom:10px; border:1px solid #bae6fd;">
-                            <strong style="color:#0369a1;">🔎 Encontrados (${filtradas.length}):</strong>`;
-        filtradas.forEach(f => {
-            htmlFiltro += `<div class="item-filtro-lista" onclick="selecionarUnica(${f.id})" style="cursor:pointer; padding:5px; border-bottom:1px solid #e0e0e0; font-size:0.85em;">
-                            Apto ${f.sala} - ${f.destinatario.split(' ')[0]}...
-                           </div>`;
-        });
-        htmlFiltro += `</div>`;
-        contDetalhes.innerHTML = htmlFiltro + `<p style="font-size:0.8em; color:#999; text-align:center;">Selecione um item acima para finalizar.</p>`;
-    }
-
+    // 3. Criar as linhas da tabela
     filtradas.forEach(enc => {
         const tr = document.createElement('tr');
-        tr.onclick = () => selecionarUnica(enc.id);
-        const corStatus = enc.status === 'Retirado' ? '#15803d' : '#f59e0b';
+        
+        // CORREÇÃO DO CLIQUE: Chama a função para mostrar detalhes à direita
+        tr.onclick = () => selecionarUnica(enc.id); 
+
+        // Cores de Status que você pediu (Preto para Retirado, Dourado para Aguardando)
+        const classeStatus = enc.status === 'Retirado' ? 'status-retirado' : 'status-aguardando';
+        const corTextoStatus = enc.status === 'Retirado' ? '#000000' : '#b59410';
+
         tr.innerHTML = `
             <td>${enc.data}</td>
             <td>${enc.nf}</td>
             <td>${enc.sala}</td>
             <td>${enc.destinatario}</td>
-            <td style="color:${corStatus}; font-weight:bold;">${enc.status}</td>
+            <td class="${classeStatus}" style="color:${corTextoStatus}; font-weight:800;">${enc.status}</td>
             <td>
                 <button onclick="event.stopPropagation(); editarEncomenda(${enc.id})" style="cursor:pointer; background:none; border:none; font-size:1.2em;">✏️</button>
-                <button onclick="event.stopPropagation(); excluirEncomenda(${enc.id})" style="cursor:pointer; background:none; border:none; font-size:1.2em;">🗑️</button>
+                <button class="btn-perigo" onclick="event.stopPropagation(); excluirEncomenda(${enc.id})" style="cursor:pointer; background:none; border:none; font-size:1.2em;">🗑️</button>
             </td>
         `;
         corpo.appendChild(tr);
