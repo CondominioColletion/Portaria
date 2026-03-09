@@ -9,7 +9,7 @@
     --texto: #1e293b;
     --borda: #e2e8f0;
     --sucesso: #22c55e;
-    --alerta: #b59410; /* Dourado para alertas/aguardando */
+    --alerta: #b59410; 
     --perigo: #dc2626;
 }
 
@@ -42,7 +42,7 @@ header {
 header h1 { 
     margin: 0; 
     font-size: 3.8rem; 
-    font-family: 'Great Vibes', cursive; /* Requer link Google Fonts no HTML */
+    font-family: 'Great Vibes', cursive; 
     font-weight: 400;
     text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
 }
@@ -76,15 +76,6 @@ main {
     border: 1px solid var(--borda);
 }
 
-h3 { 
-    margin-top: 0; 
-    font-size: 1.1rem; 
-    color: var(--secundaria); 
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-}
-
 /* ================= FORMULÁRIO E INPUTS ================= */
 input, select {
     width: 100%;
@@ -103,7 +94,7 @@ input:focus, select:focus {
 
 /* ================= BOTÕES UNIFICADOS (DOURADO E PRETO) ================= */
 
-/* Botão Principal, Câmera, Filtros e Exportar */
+/* Botões de Ação Geral */
 .btn-principal, .btn-secundario, .btn-filtro, .btn-exportar, #btnSalvar {
     background: var(--dourado) !important; 
     color: #000000 !important;
@@ -118,7 +109,6 @@ input:focus, select:focus {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    text-decoration: none;
 }
 
 .btn-principal:hover, .btn-secundario:hover, .btn-filtro:hover, .btn-exportar:hover { 
@@ -126,7 +116,7 @@ input:focus, select:focus {
     box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4) !important; 
 }
 
-/* Botão de Perigo (Excluir) */
+/* Botão de Excluir (dentro da tabela) */
 .btn-perigo {
     background-color: transparent;
     color: var(--perigo);
@@ -135,6 +125,8 @@ input:focus, select:focus {
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.8rem;
+    position: relative;
+    z-index: 10; /* Garante que o botão de apagar funcione independente da linha */
 }
 
 .btn-perigo:hover {
@@ -142,24 +134,7 @@ input:focus, select:focus {
     color: white;
 }
 
-/* Sugestões de Moradores */
-.btn-sugestao {
-    background: #f1f5f9;
-    border: 1px solid var(--borda);
-    color: var(--texto);
-    padding: 8px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    margin: 2px;
-}
-
-.btn-sugestao:hover {
-    background: var(--dourado);
-    color: #000;
-}
-
-/* ================= TABELA E STATUS ================= */
+/* ================= TABELA (CORREÇÃO DE CLIQUE) ================= */
 .table-responsive { overflow-x: auto; }
 
 table { width: 100%; border-collapse: collapse; margin-top: 10px; }
@@ -171,14 +146,24 @@ th {
 
 td { padding: 12px; border-bottom: 1px solid var(--borda); font-size: 0.9rem; }
 
-/* Cores de Status Solicitadas */
+/* Garante que a linha seja clicável e mostre o cursor de mão */
+tr {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+tr:hover { 
+    background-color: #f1f5f9 !important; 
+}
+
+/* Estilo dos Status */
 .status-aguardando {
-    color: #b59410 !important; /* Dourado escuro */
+    color: #b59410 !important;
     font-weight: 800 !important;
 }
 
 .status-retirado {
-    color: #000000 !important; /* Preto */
+    color: #000000 !important;
     font-weight: 800 !important;
 }
 
@@ -199,8 +184,6 @@ td { padding: 12px; border-bottom: 1px solid var(--borda); font-size: 0.9rem; }
 }
 
 .card span { font-size: 1.8rem; font-weight: 800; color: var(--primaria); }
-
-/* Cores do Dash seguindo a regra */
 .card.aguardando span { color: #b59410; } 
 .card.retirados span { color: #000000; }
 .card.memoria span { color: #6366f1; }
@@ -218,7 +201,7 @@ td { padding: 12px; border-bottom: 1px solid var(--borda); font-size: 0.9rem; }
     display: none; 
     position: fixed; 
     bottom: 20px; 
-    left: 20px; /* Posicionado na esquerda conforme pedido */
+    left: 20px; 
     z-index: 1000;         
     border: none; 
     background: var(--dourado); 
@@ -232,15 +215,4 @@ td { padding: 12px; border-bottom: 1px solid var(--borda); font-size: 0.9rem; }
     display: flex; 
     align-items: center; 
     justify-content: center;
-}
-
-#btnVoltarTopo:hover {
-    transform: scale(1.1);
-}
-
-.placeholder-text {
-    color: #94a3b8;
-    text-align: center;
-    padding: 40px 20px;
-    font-style: italic;
 }
