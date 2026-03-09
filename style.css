@@ -23,14 +23,24 @@ body {
     line-height: 1.6;
 }
 
-header {
-    background-color: var(--primaria);
-    color: white;
-    padding: 2rem 1rem;
+/* Estilização do Bloco do Título */
+.header-container { 
+    background: linear-gradient(145deg, #d4af37, #f1d592); /* Tom de Dourado com brilho */
+    padding: 20px;
     text-align: center;
-    margin-bottom: 25px;
-    border-radius: 0 0 15px 15px;
-    box-shadow: 0 4px 12px rgba(21, 128, 61, 0.2);
+    border-radius: 0 0 15px 15px; /* Bordas arredondadas embaixo */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+
+/* Estilização da Letra "Condomínio Collection" */
+.header-container h1 {
+    font-family: 'Great Vibes', cursive; /* A fonte estilosa */
+    color: #000000; /* Preto absoluto */
+    font-size: 38px; /* Tamanho maior para destacar a cursiva */
+    margin: 0;
+    font-weight: 400;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.3); /* Leve brilho branco atrás do preto */
 }
 
 header h1 { margin: 0; font-size: 1.8rem; font-weight: 800; }
