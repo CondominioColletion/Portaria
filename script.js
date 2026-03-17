@@ -675,35 +675,6 @@ function gerarRelatorioAssinaturas() {
     telaImpressao.document.close();
 }
 
-// ================= 2º PASSO: APAGAR ENCOMENDAS DA DATA =================
-function limparPorData() {
-    const campoData = document.getElementById('dataParaLimpar').value;
-
-    if (!campoData) {
-        alert("Selecione a data para apagar.");
-        return;
-    }
-
-    const [ano, mes, dia] = campoData.split('-');
-    const dataFormatada = `${dia}/${mes}/${ano}`;
-
-    const totalNaData = encomendas.filter(e => e.data === dataFormatada).length;
-
-    if (totalNaData === 0) {
-        alert("Nenhuma encomenda encontrada nesta data.");
-        return;
-    }
-
-    const confirmacao = confirm(`⚠️ CUIDADO: Você vai apagar ${totalNaData} registros de ${dataFormatada}.\n\nJá salvou o relatório em PDF? Deseja continuar?`);
-
-    if (confirmacao) {
-        encomendas = encomendas.filter(e => e.data !== dataFormatada);
-        salvarEAtualizar();
-        document.getElementById('dataParaLimpar').value = '';
-        alert("Registros apagados com sucesso!");
-    }
-}
-
 // ================= ADICIONAL: RELATÓRIO DE CONFERÊNCIA ANTES DE APAGAR =================
 function gerarRelatorioAssinaturas() {
     const campoData = document.getElementById('dataParaLimpar').value;
