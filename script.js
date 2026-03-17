@@ -675,7 +675,7 @@ function gerarRelatorioAssinaturas() {
     telaImpressao.document.close();
 }
 
-// ================= ADICIONAL: RELATÓRIO DE CONFERÊNCIA ANTES DE APAGAR =================
+// ================= 1º PASSO: GERAR RELATÓRIO PARA PRINTAR =================
 function gerarRelatorioAssinaturas() {
     const campoData = document.getElementById('dataParaLimpar').value;
 
@@ -684,28 +684,10 @@ function gerarRelatorioAssinaturas() {
         return;
     }
 
-    // Formata a data para o padrão do seu sistema (dd/mm/aaaa)
     const [ano, mes, dia] = campoData.split('-');
     const dataBusca = `${dia}/${mes}/${ano}`;
 
     // Filtra apenas as entregas concluídas com assinatura naquela data
-    const entregas = encomendas.filter(e => 
-        e.status === 'Retirado' && 
-        e.dataRetirada.includes(dataBusca)
-    );
-
-    // ================= 1º PASSO: GERAR RELATÓRIO PARA PRINTAR =================
-function gerarRelatorioAssinaturas() {
-    const campoData = document.getElementById('dataParaLimpar').value;
-
-    if (!campoData) {
-        alert("Por favor, selecione a data no calendário primeiro.");
-        return;
-    }
-
-    const [ano, mes, dia] = campoData.split('-');
-    const dataBusca = `${dia}/${mes}/${ano}`;
-
     const entregas = encomendas.filter(e => 
         e.status === 'Retirado' && 
         e.dataRetirada.includes(dataBusca) &&
@@ -724,38 +706,50 @@ function gerarRelatorioAssinaturas() {
         <head>
             <title>Relatório de Assinaturas - ${dataBusca}</title>
             <style>
-                body { font-family: Arial, sans-serif; padding: 20px; }
-                h2 { text-align: center; color: #333; border-bottom: 2px solid #333; padding-bottom: 10px; }
-                .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-                .caixa { border: 1px solid #000; padding: 10px; page-break-inside: avoid; }
-                .img-assinatura { width: 100%; height: auto; border-bottom: 1px solid #eee; }
-                .info { font-size: 11px; margin-top: 5px; }
-                .apto { font-weight: bold; font-size: 13px; color: #DAA520; }
-                @media print { .no-print { display: none; } }
+                body { font-family: Arial, sans-serif; padding: 20px; background: white; }
+                h1 { text-align: center; color: #333; border-bottom: 2px solid #333; padding-bottom: 10px; }
+                .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+                .caixa-assinatura { border: 1px solid #000; padding: 10px; page-break-inside: avoid; }
+                .foto-assinatura { width: 100%; height: auto; border-bottom: 1px solid #ccc; margin-bottom: 8px; }
+                .detalhes { font-size: 12px; line-height: 1.4; }
+                .apto-destaque { font-weight: bold; font-size: 14px; color: #DAA520; }
+                @media print { .no-print { display: none; } body { padding: 0; } }
             </style>
         </head>
         <body>
             <div class="no-print" style="text-align: center; margin-bottom: 20px;">
-                <button onclick="window.print()" style="padding: 10px 20px; background: #22c55e; color: white; border: none; border-radius: 5px; cursor: pointer;">🖨️ Imprimir / Salvar PDF</button>
+                <button onclick="window.print()" style="padding: 10px 20px; background: #22c55e; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                    🖨️ Confirmar Impressão / Salvar PDF
+                </button>
             </div>
-            <h2>Relatório de Assinaturas - ${dataBusca}</h2>
+            <h1>Protocolo de Entrega - Condomínio Collection</h1>
+            <p><strong>Data:</strong> ${dataBusca} | <strong>Total:</strong> ${entregas.length}</p>
             <div class="grid">
     `;
 
     entregas.forEach(e => {
         conteudo += `
-            <div class="caixa">
-                <img src="${e.assinatura}" class="img-assinatura">
-                <div class="info">
-                    <div class="apto">Unidade: ${e.sala}</div>
+            <div class="caixa-assinatura">
+                <img src="${e.assinatura}" class="foto-assinatura">
+                <div class="detalhes">
+                    <div class="apto-destaque">Unidade: ${e.sala}</div>
                     <div><strong>Retirado por:</strong> ${e.quemRetirou}</div>
                     <div><strong>Data/Hora:</strong> ${e.dataRetirada}</div>
+                    <div><strong>NF:</strong> ${e.nf} | <strong>Destinatário:</strong> ${e.destinatario}</div>
                 </div>
             </div>
         `;
     });
 
-    conteudo += `</div></body></html>`;
+    conteudo += `
+            </div>
+            <p style="margin-top: 40px; text-align: center; font-size: 10px; color: #666;">
+                Documento gerado em ${new Date().toLocaleString('pt-BR')}
+            </p>
+        </body>
+        </html>
+    `;
+
     telaImpressao.document.write(conteudo);
     telaImpressao.document.close();
 }
@@ -779,75 +773,16 @@ function limparPorData() {
         return;
     }
 
-    // Confirmação reforçada para garantir o print antes
-    const confirmacao = confirm(`⚠️ CUIDADO: Você vai apagar permanentemente ${totalNaData} registros de ${dataFormatada}.\n\nVOCÊ JÁ SALVOU O RELATÓRIO COM AS ASSINATURAS?\n\nClique em OK apenas se já tiver printado ou salvo o PDF.`);
+    const confirmacao = confirm(`⚠️ CUIDADO: Você vai apagar permanentemente ${totalNaData} registros de ${dataFormatada}.\n\nVOCÊ JÁ SALVOU O RELATÓRIO EM PDF?\n\nClique em OK apenas se já tiver o comprovante salvo.`);
 
     if (confirmacao) {
+        // Remove as encomendas daquela data
         encomendas = encomendas.filter(e => e.data !== dataFormatada);
-        salvarEAtualizar(); // Essa função deve existir no seu script para salvar no LocalStorage
+        
+        // Salva e atualiza a tela
+        salvarEAtualizar();
+        
         document.getElementById('dataParaLimpar').value = '';
         alert("Registros apagados com sucesso!");
     }
-}
-    if (entregas.length === 0) {
-        alert("Nenhuma assinatura encontrada para esta data.");
-        return;
-    }
-
-    // Abre uma nova aba configurada para impressão
-    const telaImpressao = window.open('', '_blank');
-    
-    let conteudo = `
-        <html>
-        <head>
-            <title>Relatório de Assinaturas - ${dataBusca}</title>
-            <style>
-                body { font-family: Arial, sans-serif; padding: 30px; background: white; }
-                h1 { text-align: center; color: #333; border-bottom: 2px solid #333; padding-bottom: 10px; }
-                .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-                .caixa-assinatura { border: 1px solid #000; padding: 10px; page-break-inside: avoid; }
-                .foto-assinatura { width: 100%; height: auto; border-bottom: 1px solid #ccc; margin-bottom: 8px; }
-                .detalhes { font-size: 12px; line-height: 1.4; }
-                .apto-destaque { font-weight: bold; font-size: 14px; color: #0369a1; }
-                @media print {
-                    button { display: none; }
-                    body { padding: 0; }
-                }
-            </style>
-        </head>
-        <body>
-            <button onclick="window.print()" style="padding: 10px 20px; background: #22c55e; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; font-weight: bold;">
-                🖨️ Confirmar Impressão / Salvar PDF
-            </button>
-            <h1>Protocolo de Entrega - Condomínio Collection</h1>
-            <p><strong>Data de Referência:</strong> ${dataBusca} | <strong>Total de Registros:</strong> ${entregas.length}</p>
-            
-            <div class="grid">
-    `;
-
-    entregas.forEach(e => {
-        conteudo += `
-            <div class="caixa-assinatura">
-                <img src="${e.assinatura}" class="foto-assinatura">
-                <div class="detalhes">
-                    <div class="apto-destaque">Unidade: ${e.sala}</div>
-                    <div><strong>Retirado por:</strong> ${e.quemRetirou}</div>
-                    <div><strong>Data/Hora:</strong> ${e.dataRetirada}</div>
-                    <div><strong>NF:</strong> ${e.nf} | <strong>Destinatário:</strong> ${e.destinatario}</div>
-                </div>
-            </div>
-        `;
-    });
-
-    conteudo += `
-            </div>
-            <p style="margin-top: 40px; text-align: center; font-size: 10px; color: #666;">
-                Documento gerado em ${new Date().toLocaleString('pt-BR')} - Sistema Condomínio Collection
-            </p>
-        </body>
-        </html>
-    `;
-
-    telaImpressao.document.write(conteudo);
-    telaImpressao.document.close();
 }
