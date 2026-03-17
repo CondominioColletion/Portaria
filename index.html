@@ -78,11 +78,11 @@
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-    <button onclick="gerarRelatorioAssinaturas()" style="padding: 12px; background-color: #7dd3fc; color: #0369a1; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+    <button onclick="gerarRelatorioAssinaturas()" style="padding: 12px; background-color: #DAA520; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
         🖨️ 1º Ver/Printar
     </button>
     
-    <button onclick="limparPorData()" style="padding: 12px; background-color: #fca5a5; color: #991b1b; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+    <button onclick="limparPorData()" style="padding: 12px; background-color: #dc2626; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
         🗑️ 2º Apagar Tudo
     </button>
 </div>
@@ -97,14 +97,7 @@
                 <button onclick="limparFiltros()" class="btn-secundario" style="flex: 1;">Limpar Filtros</button>
                 <button onclick="exportarCSV()" class="btn-exportar" style="flex: 1;">Exportar CSV (Excel)</button>
             </div>
-            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed #ccc;">
-                <h4 style="color: #dc2626; margin-bottom: 10px;">🗑️ Limpar por Data</h4>
-                <div style="display: flex; gap: 10px; align-items: center;">
-                <input type="date" id="dataParaLimpar" style="margin-bottom: 0; flex: 2;">
-                <button onclick="limparPorData()" class="btn-perigo" style="flex: 1; padding: 12px; background-color: #dc2626; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Apagar Tudo</button>
-            </div>
-      </div>
-
+            
         <div id="resultadoBusca" class="container">
             <h3>📌 Detalhes / Busca Rápida</h3>
             <div id="resultadoConteudo"><p class="placeholder-text">Selecione uma encomenda ou use os filtros.</p></div>
