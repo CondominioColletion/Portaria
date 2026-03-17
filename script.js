@@ -603,43 +603,107 @@ function verificarEspaco() {
     }
     console.log("Espaço usado: " + total.toFixed(2) + " MB de 5.00 MB");
 }
-// ================= ADICIONAL: LIMPAR ENCOMENDAS POR DATA =================
+
+// ================= 1º PASSO: GERAR RELATÓRIO PARA PRINTAR =================
+function gerarRelatorioAssinaturas() {
+    const campoData = document.getElementById('dataParaLimpar').value;
+
+    if (!campoData) {
+        alert("Por favor, selecione a data no calendário primeiro.");
+        return;
+    }
+
+    // Formata a data para o padrão do seu sistema (dd/mm/aaaa)
+    const [ano, mes, dia] = campoData.split('-');
+    const dataBusca = `${dia}/${mes}/${ano}`;
+
+    // Filtra apenas as entregas concluídas com assinatura naquela data
+    const entregas = encomendas.filter(e => 
+        e.status === 'Retirado' && 
+        e.dataRetirada.includes(dataBusca) &&
+        e.assinatura
+    );
+
+    if (entregas.length === 0) {
+        alert("Nenhuma assinatura encontrada para esta data.");
+        return;
+    }
+
+    const telaImpressao = window.open('', '_blank');
+    
+    let conteudo = `
+        <html>
+        <head>
+            <title>Relatório de Assinaturas - ${dataBusca}</title>
+            <style>
+                body { font-family: Arial, sans-serif; padding: 20px; background: white; }
+                h2 { text-align: center; color: #333; border-bottom: 2px solid #333; padding-bottom: 10px; }
+                .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+                .caixa { border: 1px solid #000; padding: 10px; page-break-inside: avoid; background: #fff; }
+                .img-assinatura { width: 100%; height: auto; border-bottom: 1px solid #eee; margin-bottom: 5px; }
+                .info { font-size: 11px; line-height: 1.3; }
+                .apto { font-weight: bold; font-size: 13px; color: #0369a1; }
+                @media print { .no-print { display: none; } }
+            </style>
+        </head>
+        <body>
+            <div class="no-print" style="margin-bottom: 20px; text-align: center;">
+                <button onclick="window.print()" style="padding: 10px 20px; background: #22c55e; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                    🖨️ Imprimir ou Salvar PDF
+                </button>
+            </div>
+            <h2>Relatório de Assinaturas - ${dataBusca}</h2>
+            <div class="grid">
+    `;
+
+    entregas.forEach(e => {
+        conteudo += `
+            <div class="caixa">
+                <img src="${e.assinatura}" class="img-assinatura">
+                <div class="info">
+                    <div class="apto">Unidade: ${e.sala}</div>
+                    <div><strong>Retirado por:</strong> ${e.quemRetirou}</div>
+                    <div><strong>Hora:</strong> ${e.dataRetirada.split(',')[1]}</div>
+                    <div><strong>NF:</strong> ${e.nf}</div>
+                </div>
+            </div>
+        `;
+    });
+
+    conteudo += `</div></body></html>`;
+    telaImpressao.document.write(conteudo);
+    telaImpressao.document.close();
+}
+
+// ================= 2º PASSO: APAGAR ENCOMENDAS DA DATA =================
 function limparPorData() {
     const campoData = document.getElementById('dataParaLimpar').value;
 
     if (!campoData) {
-        alert("Por favor, selecione uma data.");
+        alert("Selecione a data para apagar.");
         return;
     }
 
-    // Converte a data do input (aaaa-mm-dd) para o formato do seu banco (dd/mm/aaaa)
     const [ano, mes, dia] = campoData.split('-');
     const dataFormatada = `${dia}/${mes}/${ano}`;
 
-    // Filtra para ver se existem encomendas nessa data
-    const encomendasNaData = encomendas.filter(e => e.data === dataFormatada);
+    const totalNaData = encomendas.filter(e => e.data === dataFormatada).length;
 
-    if (encomendasNaData.length === 0) {
+    if (totalNaData === 0) {
         alert("Nenhuma encomenda encontrada nesta data.");
         return;
     }
 
-    // Confirmação obrigatória antes de apagar
-    const confirmacao = confirm(`Você tem certeza? Isso apagará permanentemente as ${encomendasNaData.length} encomendas do dia ${dataFormatada}.`);
+    const confirmacao = confirm(`⚠️ CUIDADO: Você vai apagar ${totalNaData} registros de ${dataFormatada}.\n\nJá salvou o relatório em PDF? Deseja continuar?`);
 
     if (confirmacao) {
-        // Remove as encomendas daquela data mantendo o restante
         encomendas = encomendas.filter(e => e.data !== dataFormatada);
-        
-        // Salva no LocalStorage e atualiza a tabela/dashboard
         salvarEAtualizar();
-        
-        // Limpa o campo de data
         document.getElementById('dataParaLimpar').value = '';
-        
-        alert("Limpeza concluída!");
+        alert("Registros apagados com sucesso!");
     }
 }
+
 // ================= ADICIONAL: RELATÓRIO DE CONFERÊNCIA ANTES DE APAGAR =================
 function gerarRelatorioAssinaturas() {
     const campoData = document.getElementById('dataParaLimpar').value;
