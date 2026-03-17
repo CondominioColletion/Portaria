@@ -603,3 +603,40 @@ function verificarEspaco() {
     }
     console.log("Espaço usado: " + total.toFixed(2) + " MB de 5.00 MB");
 }
+// ================= ADICIONAL: LIMPAR ENCOMENDAS POR DATA =================
+function limparPorData() {
+    const campoData = document.getElementById('dataParaLimpar').value;
+
+    if (!campoData) {
+        alert("Por favor, selecione uma data.");
+        return;
+    }
+
+    // Converte a data do input (aaaa-mm-dd) para o formato do seu banco (dd/mm/aaaa)
+    const [ano, mes, dia] = campoData.split('-');
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+
+    // Filtra para ver se existem encomendas nessa data
+    const encomendasNaData = encomendas.filter(e => e.data === dataFormatada);
+
+    if (encomendasNaData.length === 0) {
+        alert("Nenhuma encomenda encontrada nesta data.");
+        return;
+    }
+
+    // Confirmação obrigatória antes de apagar
+    const confirmacao = confirm(`Você tem certeza? Isso apagará permanentemente as ${encomendasNaData.length} encomendas do dia ${dataFormatada}.`);
+
+    if (confirmacao) {
+        // Remove as encomendas daquela data mantendo o restante
+        encomendas = encomendas.filter(e => e.data !== dataFormatada);
+        
+        // Salva no LocalStorage e atualiza a tabela/dashboard
+        salvarEAtualizar();
+        
+        // Limpa o campo de data
+        document.getElementById('dataParaLimpar').value = '';
+        
+        alert("Limpeza concluída!");
+    }
+}
