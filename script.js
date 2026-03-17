@@ -640,3 +640,84 @@ function limparPorData() {
         alert("Limpeza concluída!");
     }
 }
+// ================= ADICIONAL: RELATÓRIO DE CONFERÊNCIA ANTES DE APAGAR =================
+function gerarRelatorioAssinaturas() {
+    const campoData = document.getElementById('dataParaLimpar').value;
+
+    if (!campoData) {
+        alert("Por favor, selecione a data no calendário primeiro.");
+        return;
+    }
+
+    // Formata a data para o padrão do seu sistema (dd/mm/aaaa)
+    const [ano, mes, dia] = campoData.split('-');
+    const dataBusca = `${dia}/${mes}/${ano}`;
+
+    // Filtra apenas as entregas concluídas com assinatura naquela data
+    const entregas = encomendas.filter(e => 
+        e.status === 'Retirado' && 
+        e.dataRetirada.includes(dataBusca)
+    );
+
+    if (entregas.length === 0) {
+        alert("Nenhuma assinatura encontrada para esta data.");
+        return;
+    }
+
+    // Abre uma nova aba configurada para impressão
+    const telaImpressao = window.open('', '_blank');
+    
+    let conteudo = `
+        <html>
+        <head>
+            <title>Relatório de Assinaturas - ${dataBusca}</title>
+            <style>
+                body { font-family: Arial, sans-serif; padding: 30px; background: white; }
+                h1 { text-align: center; color: #333; border-bottom: 2px solid #333; padding-bottom: 10px; }
+                .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+                .caixa-assinatura { border: 1px solid #000; padding: 10px; page-break-inside: avoid; }
+                .foto-assinatura { width: 100%; height: auto; border-bottom: 1px solid #ccc; margin-bottom: 8px; }
+                .detalhes { font-size: 12px; line-height: 1.4; }
+                .apto-destaque { font-weight: bold; font-size: 14px; color: #0369a1; }
+                @media print {
+                    button { display: none; }
+                    body { padding: 0; }
+                }
+            </style>
+        </head>
+        <body>
+            <button onclick="window.print()" style="padding: 10px 20px; background: #22c55e; color: white; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 20px; font-weight: bold;">
+                🖨️ Confirmar Impressão / Salvar PDF
+            </button>
+            <h1>Protocolo de Entrega - Condomínio Collection</h1>
+            <p><strong>Data de Referência:</strong> ${dataBusca} | <strong>Total de Registros:</strong> ${entregas.length}</p>
+            
+            <div class="grid">
+    `;
+
+    entregas.forEach(e => {
+        conteudo += `
+            <div class="caixa-assinatura">
+                <img src="${e.assinatura}" class="foto-assinatura">
+                <div class="detalhes">
+                    <div class="apto-destaque">Unidade: ${e.sala}</div>
+                    <div><strong>Retirado por:</strong> ${e.quemRetirou}</div>
+                    <div><strong>Data/Hora:</strong> ${e.dataRetirada}</div>
+                    <div><strong>NF:</strong> ${e.nf} | <strong>Destinatário:</strong> ${e.destinatario}</div>
+                </div>
+            </div>
+        `;
+    });
+
+    conteudo += `
+            </div>
+            <p style="margin-top: 40px; text-align: center; font-size: 10px; color: #666;">
+                Documento gerado em ${new Date().toLocaleString('pt-BR')} - Sistema Condomínio Collection
+            </p>
+        </body>
+        </html>
+    `;
+
+    telaImpressao.document.write(conteudo);
+    telaImpressao.document.close();
+}
