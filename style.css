@@ -376,3 +376,8 @@ canvas {
     border: none !important;           /* Tira qualquer borda estranha */
     padding: 0 !important;             /* Remove espaços internos que achatam a seta */
 }
+
+/* Garante que o bloco de entrega comece escondido */
+#blocoConfirmarRetirada {
+    display: none;
+}
