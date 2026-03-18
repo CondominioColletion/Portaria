@@ -306,3 +306,34 @@ button[onclick*="Camera"]:hover {
     border: 1px solid #ccc;
     display: block;
 }
+
+/* --- AJUSTE DE ESPESSURA (ALTURA) PARA CELULAR --- */
+input[type="text"], 
+input[type="number"], 
+input[type="tel"], 
+input[type="password"], 
+input[type="date"], 
+select {
+    height: 50px !important;    /* Força a altura de 50px */
+    padding: 12px 15px !important; 
+    font-size: 16px !important; /* Evita o zoom automático no iPhone */
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+/* Ajusta os botões para acompanharem a altura dos campos */
+.btn-principal, 
+.btn-secundario, 
+.btn-perigo, 
+.btn-exportar,
+#btnAbrirCamera {
+    height: 50px !important;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Ajuste para o campo de data de limpeza */
+#dataParaLimpar {
+    height: 50px !important;
+}
