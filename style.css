@@ -377,7 +377,7 @@ canvas {
     padding: 0 !important;             /* Remove espaços internos que achatam a seta */
 }
 
-/* Garante que o bloco de entrega comece escondido */
+/* FORÇA O BLOCO A COMEÇAR ESCONDIDO NO CARREGAMENTO */
 #blocoConfirmarRetirada {
-    display: none;
+    display: none !important;
 }
