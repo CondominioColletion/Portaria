@@ -366,3 +366,13 @@ canvas {
     max-width: 100% !important;
     height: auto !important;
 }
+
+#btnVoltarTopo {
+    border-radius: 4px !important;    /* Transforma a bola em quadrado (quase reto) */
+    background-color: #888 !important; /* Deixa o fundo cinza */
+    color: white !important;           /* Garante a seta branca */
+    width: 45px !important;            /* Tamanho fixo do quadrado */
+    height: 45px !important;           /* Altura igual para ser quadrado */
+    border: none !important;           /* Tira qualquer borda estranha */
+    padding: 0 !important;             /* Remove espaços internos que achatam a seta */
+}
