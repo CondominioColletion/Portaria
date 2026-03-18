@@ -307,65 +307,62 @@ button[onclick*="Camera"]:hover {
     display: block;
 }
 
-/* --- RESET TOTAL DE LARGURA (SOLUÇÃO DEFINITIVA) --- */
+/* --- RESET DE EMERGÊNCIA (PARA NÃO CORTAR NO CELULAR) --- */
 
-/* 1. Trava o tamanho da 'folha' do site no tamanho exato da tela do celular */
+/* 1. Força a folha do site a ser EXATAMENTE do tamanho da tela */
 html, body {
-    width: 100% !important;
+    width: 100vw !important;
     max-width: 100vw !important;
     margin: 0 !important;
     padding: 0 !important;
-    overflow-x: hidden !important; /* Proíbe a rolagem para os lados */
-    touch-action: pan-y; /* Permite rolar apenas para cima e para baixo */
+    overflow-x: hidden !important; /* Proíbe o site de balançar para os lados */
+    position: relative !important;
+    -webkit-text-size-adjust: 100%; /* Evita que o iPhone aumente a letra sozinho */
 }
 
-/* 2. Força TODOS os elementos a respeitarem a borda da tela */
+/* 2. O 'Pulo do Gato': Impede que qualquer coisa seja maior que a tela */
 * {
     max-width: 100% !important;
     box-sizing: border-box !important;
 }
 
-/* 3. Ajusta os containers para não terem margens que empurram o site */
+/* 3. Ajusta os containers (caixas brancas) */
 .container, main, .coluna-dados, header, #dashboard {
     width: 100% !important;
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
     padding: 10px !important;
+    display: block !important; /* Força um embaixo do outro */
 }
 
-/* 4. O GRANDE VILÃO: Campos lado a lado que não cabem */
+/* 4. Resolve o problema dos campos lado a lado (NF, Câmera, Apto) */
 .campo-grupo {
     display: flex !important;
-    flex-direction: column !important; /* No celular, coloca UM EMBAIXO DO OUTRO */
-    width: 100% !important;
+    flex-direction: column !important; /* No celular, TUDO fica um embaixo do outro */
     gap: 10px !important;
-}
-
-/* Se o NF e a Câmera estiverem em uma sub-div, forçamos elas também */
-.campo-grupo div {
     width: 100% !important;
-    display: flex !important;
-    gap: 5px !important;
 }
 
-/* 5. Ajuste dos botões e inputs para não vazarem */
-input, select, button {
+/* Garante que os inputs ocupem a largura toda da linha deles */
+input, select, button, .campo-grupo div {
     width: 100% !important;
-    height: 50px !important; /* Mantém a espessura boa que você gostou */
-    font-size: 16px !important;
+    max-width: 100% !important;
+    height: 50px !important; /* Altura boa para o dedo */
+    display: block !important;
 }
 
-/* 6. Ajuste da Tabela (ela costuma travar a largura do site) */
+/* 5. Se a tabela for o que está esticando o site, ela vai ganhar uma barra de rolagem própria */
 .table-responsive {
     width: 100% !important;
-    overflow-x: auto !important; /* Cria rolagem interna APENAS na tabela */
+    overflow-x: auto !important; 
     display: block !important;
     -webkit-overflow-scrolling: touch;
 }
 
-/* 7. Ajuste do Canvas de Assinatura */
+/* 6. Ajuste para o Canvas de Assinatura não vazar */
 canvas {
     width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
 }
