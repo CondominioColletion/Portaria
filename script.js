@@ -342,7 +342,12 @@ if (filtradas.length > 0 && (fSala || fNF || fNome)) {
     htmlFiltro += `</div>`;
     contDetalhes.innerHTML = htmlFiltro + `<p style="font-size:0.8em; color:#999; text-align:center;">Clique no item desejado para detalhes ou finalizar.</p>`;
 } else if (!fSala && !fNF && !fNome) {
+    // Se os filtros estiverem vazios, volta ao texto padrão
     contDetalhes.innerHTML = `<p class="placeholder-text">Selecione uma encomenda ou use os filtros.</p>`;
+    
+    // --- LINHA ADICIONADA AQUI: Esconde o bloco de PIN quando limpar o filtro ---
+    const bloco = document.getElementById('blocoConfirmarRetirada');
+    if (bloco) bloco.style.display = 'none';
 }
     // --- RENDERIZAÇÃO DA TABELA PRINCIPAL ---
     filtradas.forEach(enc => {
