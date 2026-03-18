@@ -318,25 +318,32 @@ function renderizarTabela() {
     });
 
     // --- MELHORIA 2: RESULTADO NO DETALHES (FILTRO ATIVO) ---
-    const contDetalhes = document.getElementById('resultadoConteudo');
-    
-    // Se houver texto nos filtros, mostra a lista rápida na direita
-    if (filtradas.length > 0 && (fSala || fNF || fNome)) {
-        let htmlFiltro = `<div style="padding:10px; background:#fffcf0; border-radius:8px; margin-bottom:10px; border:1px solid #d4af37;">
-                            <strong style="color:#b59410;">🔎 Encontrados (${filtradas.length}):</strong>`;
-        
-        filtradas.forEach(f => {
-            htmlFiltro += `<div class="item-filtro-lista" onclick="selecionarUnica(${f.id})" style="cursor:pointer; padding:8px; border-bottom:1px solid #eee; font-size:0.9em; color:#454545;">
-                            <strong>Apto ${f.sala}</strong> - ${f.destinatario}
-                           </div>`;
-        });
-        htmlFiltro += `</div>`;
-        contDetalhes.innerHTML = htmlFiltro + `<p style="font-size:0.8em; color:#999; text-align:center;">Clique no nome acima para finalizar a entrega.</p>`;
-    } else if (!fSala && !fNF && !fNome) {
-        // Se os filtros estiverem vazios, volta ao texto padrão
-        contDetalhes.innerHTML = `<p class="placeholder-text">Selecione uma encomenda ou use os filtros.</p>`;
-    }
+const contDetalhes = document.getElementById('resultadoConteudo');
 
+if (filtradas.length > 0 && (fSala || fNF || fNome)) {
+    let htmlFiltro = `<div style="padding:10px; background:#fffcf0; border-radius:8px; margin-bottom:10px; border:1px solid #d4af37;">
+                        <strong style="color:#b59410;">🔎 Encontrados (${filtradas.length}):</strong>`;
+    
+    filtradas.forEach(f => {
+        // Define a cor baseada no status para o texto rápido
+        const corStatus = f.status === 'Retirado' ? '#22c55e' : '#f59e0b';
+
+        htmlFiltro += `
+            <div class="item-filtro-lista" onclick="selecionarUnica(${f.id})" style="cursor:pointer; padding:10px; border-bottom:1px solid #eee; font-size:0.95em; color:#454545;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span><strong>Apto ${f.sala}</strong> - ${f.destinatario}</span>
+                </div>
+                <div style="font-size: 0.8em; font-weight: bold; color: ${corStatus}; margin-top: 3px;">
+                    ${f.status === 'Retirado' ? '✅ ' : '⏳ '}${f.status.toUpperCase()}
+                </div>
+            </div>`;
+    });
+    
+    htmlFiltro += `</div>`;
+    contDetalhes.innerHTML = htmlFiltro + `<p style="font-size:0.8em; color:#999; text-align:center;">Clique no item desejado para detalhes ou finalizar.</p>`;
+} else if (!fSala && !fNF && !fNome) {
+    contDetalhes.innerHTML = `<p class="placeholder-text">Selecione uma encomenda ou use os filtros.</p>`;
+}
     // --- RENDERIZAÇÃO DA TABELA PRINCIPAL ---
     filtradas.forEach(enc => {
         const tr = document.createElement('tr');
