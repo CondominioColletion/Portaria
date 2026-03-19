@@ -456,11 +456,15 @@ function selecionarUnica(id) {
                  <div style="background:white; padding:5px; border:1px solid #ddd; margin-top:5px;">
                     <img src="${enc.assinatura}" style="width:100%; display:block;">
                  </div>`;
-        bloco.style.display = 'none';
+        
+        // FORÇA O BLOCO A SUMIR SE JÁ FOI RETIRADO
+        bloco.style.display = 'none'; 
     } else {
         html += `<p style="color:orange; font-weight:bold;">⏳ Aguardando na portaria</p>
                  <button onclick="enviarZap(encomendas.find(e=>e.id===${enc.id}), 'chegada')" style="width:100%; padding:8px; background:#2563eb; color:white; border:none; border-radius:5px; margin-top:5px; cursor:pointer;">📲 Notificar Morador</button>`;
-        bloco.style.display = 'block';
+        
+        // FORÇA O BLOCO A APARECER PARA FAZER A RETIRADA
+        bloco.style.display = 'block'; 
         limparAssinatura();
     }
     
