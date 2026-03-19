@@ -377,7 +377,7 @@ canvas {
     padding: 0 !important;             /* Remove espaços internos que achatam a seta */
 }
 
-/* FORÇA O BLOCO A COMEÇAR ESCONDIDO NO CARREGAMENTO */
+/* Deixe apenas assim, sem o !important no final */
 #blocoConfirmarRetirada {
-    display: none !important;
+    display: none;
 }
