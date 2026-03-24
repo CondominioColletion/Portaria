@@ -24,7 +24,7 @@ const agendaMoradores = {
 "Collection43": { pin: "5127", moradores: [{ nome: "ENZO MARTINS", tel: "11984946664" }, { nome: "HIAGO VALENTE", tel: "11984946664" }, { nome: "JEFERSON PROENÇA", tel: "11984946664" }, { nome: "RUBIANA MARTINS", tel: "11984946664" }] },
 "Collection44": { pin: "6380", moradores: [{ nome: "ADRIANO DE OLIVEIRA FRANCISCO", tel: "11934190011" }, { nome: "FRANCISCO JACOME OLIVEIRA", tel: "11934190011" }, { nome: "ISABELA BORELLO FRANCISCO", tel: "11934190011" }, { nome: "PEDRO BORELLO FRANCISCO", tel: "11934190011" }] },
 "Collection51": { pin: "7492", moradores: [{ nome: "MAURICIO FRIGIERI DA SILVA", tel: "11959834034" }, { nome: "RAFAELA FRIGIERI", tel: "11934366800" }] },
-"Collection53": { pin: "8531", moradores: [{ nome: "EDGAR ALMEIDA", tel: "11967627311" }] },
+"Collection53": { pin: "8531", moradores: [{ nome: "EDGAR ALMEIDA", tel: "11967627311" }, { nome: "BERENICE FRANCO", tel: "11980306352" }] },
 "Collection54": { pin: "9640", moradores: [{ nome: "CRISTINA DRAGO", tel: "11949768974" }] },
 "Collection61": { pin: "1058", moradores: [{ nome: "VANDERLEI XAVIER DE SOUZA", tel: "11917303310" }] },
 "Collection62": { pin: "2169", moradores: [{ nome: "CARLA TAKACS", tel: "11999709958" }, { nome: "MARCO TAKACS", tel: "11999709958" }] },
