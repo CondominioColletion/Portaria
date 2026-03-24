@@ -20,7 +20,7 @@ const agendaMoradores = {
 "Collection33": { pin: "1674", moradores: [{ nome: "ANDREIA CREMA", tel: "11972872088" }, { nome: "GIOVANNA CREMA", tel: "11972795528" }, { nome: "MARCIO ROGERIO CREMA", tel: "11972795528" }] },
 "Collection34": { pin: "2789", moradores: [{ nome: "JULIANA DA CUNHA DUARTE", tel: "11964479839" }, { nome: "VICTOR HUGO LEAL", tel: "11982045872" }] },
 "Collection41": { pin: "3894", moradores: [{ nome: "ERIKA KOGA", tel: "11991693807" }, { nome: "MARINA KOGA", tel: "11991693807" }, { nome: "MAURO NOBORU KOGA", tel: "11991693807" }] },
-"Collection42": { pin: "4906", moradores: [{ nome: "ALICE KAUFFMANN", tel: "11985444341" }, { nome: "EDUARDO KAUFFMANN", tel: "11985444341" }, { nome: "KATIA KAUFFMANN", tel: "11985444341" }, { nome: "LORENA KAUFFMANN", tel: "11985444341" }] },
+"Collection42": { pin: "4906", moradores: [{ nome: "ALICE KAUFFMANN", tel: "11985444341" }, { nome: "EDUARDO KAUFFMANN", tel: "11985444341" }, { nome: "KATIA KAUFFMANN", tel: "11986155184" }, { nome: "LORENA KAUFFMANN", tel: "11985444341" }] },
 "Collection43": { pin: "5127", moradores: [{ nome: "ENZO MARTINS", tel: "11984946664" }, { nome: "HIAGO VALENTE", tel: "11984946664" }, { nome: "JEFERSON PROENÇA", tel: "11984946664" }, { nome: "RUBIANA MARTINS", tel: "11984946664" }] },
 "Collection44": { pin: "6380", moradores: [{ nome: "ADRIANO DE OLIVEIRA FRANCISCO", tel: "11934190011" }, { nome: "FRANCISCO JACOME OLIVEIRA", tel: "11934190011" }, { nome: "ISABELA BORELLO FRANCISCO", tel: "11934190011" }, { nome: "PEDRO BORELLO FRANCISCO", tel: "11934190011" }] },
 "Collection51": { pin: "7492", moradores: [{ nome: "MAURICIO FRIGIERI DA SILVA", tel: "11959834034" }, { nome: "RAFAELA FRIGIERI", tel: "11934366800" }] },
