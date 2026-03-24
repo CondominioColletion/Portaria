@@ -35,7 +35,7 @@ const agendaMoradores = {
 "Collection73": { pin: "7614", moradores: [{ nome: "RAIZA RINALDI", tel: "11965369976" }, { nome: "THIAGO NASCIMENTO RINALDI", tel: "11981990759" }] },
 "Collection74": { pin: "8725", moradores: [{ nome: "FABIO ALVES DE SOUZA", tel: "11947643431" }] },
 "Collection81": { pin: "9836", moradores: [{ nome: "JOSE RENATO ANTUNES", tel: "11983666675" }, { nome: "KELLI MERICO DA SILVA", tel: "11981144080" }] },
-"Collection82": { pin: "1947", moradores: [{ nome: "FILOMENA ZIMMERMANN", tel: "11991246491" }, { nome: "GABRIELA ZIMMERMANN", tel: "11976222335" }, { nome: "MARINA ZIMMERMANN", tel: "11992223953" }, { nome: "TAIS CRISTINA BEZERRA DE OLIVEIRA", tel: "11991246461" }] },
+"Collection82": { pin: "1947", moradores: [{ nome: "FILOMENA ZIMMERMANN", tel: "11991246491" }, { nome: "GABRIELA ZIMMERMANN", tel: "11976222335" }, { nome: "MARINA ZIMMERMANN", tel: "11992223953" }, { nome: "TAIS CRISTINA BEZERRA DE OLIVEIRA", tel: "11991246491" }] },
 "Collection83": { pin: "2059", moradores: [{ nome: "TALITA MASSAIA", tel: "11997864434" }] },
 "Collection84": { pin: "3160", moradores: [{ nome: "BRUNO SIMONATO", tel: "11958731426" }, { nome: "JEFERSON SOUZA", tel: "11953841192" }, { nome: "SIMONE SIMONATO", tel: "11991532953" }] },
 "Collection91": { pin: "4271", moradores: [{ nome: "PAULO BRAZILE JUNIOR", tel: "11914715051" }] },
