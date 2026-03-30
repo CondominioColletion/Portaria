@@ -14,7 +14,7 @@ const agendaMoradores = {
 "Collection21": { pin: "4067", moradores: [{ nome: "ITALO BERBER MUNHOZ", tel: "11996045290" }, { nome: "NATALIE GROSCHE", tel: "11996045290" }] },
 "Collection22": { pin: "5198", moradores: [{ nome: "KARINA PINEDA GOUVEIA", tel: "1199181913" }, { nome: "LEONTINA P LUPIAC", tel: "1199181913" }] },
 "Collection23": { pin: "6243", moradores: [{ nome: "AGENOR GILDO PELARIN", tel: "11981874267" }, { nome: "LUCAS V PELARIN", tel: "11983799968" }, { nome: "MARISA O PELARIN", tel: "11991927874" }] },
-"Collection24": { pin: "7359", moradores: [{ nome: "FERNANDA MIRANDA CARRILLO", tel: "11970951050" }, { nome: "ROSINES MIRANDA CARRILLO", tel: "11986121858" }] },
+"Collection24": { pin: "7359", moradores: [{ nome: "FERNANDA MIRANDA CARRILLO", tel: "11970951050" }, { nome: "ROSINES MIRANDA CARRILLO", tel: "11988814161" }] },
 "Collection31": { pin: "8421", moradores: [{ nome: "BELMIRO DIAS", tel: "11982594151" }, { nome: "CAROLINA ROSA DIAS", tel: "11982594151" }, { nome: "FLAVIA HOLDEREGGER", tel: "11982594148" }, { nome: "RICARDO HOLDEREGGER", tel: "11982594151" }] },
 "Collection32": { pin: "9562", moradores: [{ nome: "TAISA FERNANDA", tel: "11964200772" }] },
 "Collection33": { pin: "1674", moradores: [{ nome: "ANDREIA CREMA", tel: "11972872088" }, { nome: "GIOVANNA CREMA", tel: "11972795528" }, { nome: "MARCIO ROGERIO CREMA", tel: "11972795528" }] },
