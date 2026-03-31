@@ -41,7 +41,7 @@ const agendaMoradores = {
 "Collection91": { pin: "4271", moradores: [{ nome: "PAULO BRAZILE JUNIOR", tel: "11914715051" }] },
 "Collection92": { pin: "5382", moradores: [{ nome: "CESAR CORREIA", tel: "11993799039" }, { nome: "KARINE CALDI", tel: "11979762642" }] },
 "Collection93": { pin: "6493", moradores: [{ nome: "CREUSA JOSE", tel: "11997149268" }] },
-"Collection94": { pin: "7504", moradores: [{ nome: "CLEBER LUIZ CAETANO DE JESUS", tel: "11981078812" }, { nome: "PATRICIA SALLES GOMES", tel: "11974577723" }] },
+"Collection94": { pin: "7504", moradores: [{ nome: "CLEBER LUIZ CAETANO DE JESUS", tel: "11981078812" }, { nome: "PATRICIA CARPI", tel: "11981078812" }, { nome: "PATRICIA SALLES GOMES", tel: "11974577723" }] },
 "Collection101": { pin: "9223", moradores: [{ nome: "CARLOS ANTUNES", tel: "11981559223" }] },
 "Collection102": { pin: "9726", moradores: [{ nome: "FABIO ROGERIO SILVA PERES", tel: "11958832418" }] },
 "Collection103": { pin: "1837", moradores: [{ nome: "LUCIANA MINUS", tel: "11942144459" }, { nome: "PAULO JOSE DIEBE", tel: "11984152069" }] },
