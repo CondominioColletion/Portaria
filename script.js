@@ -57,7 +57,7 @@ const agendaMoradores = {
 "Collection131": { pin: "2837", moradores: [{ nome: "FERNANDA MELLA", tel: "11991969659" }, { nome: "THIAGO PAES MELLA", tel: "11991969659" }] },
 "Collection132": { pin: "3948", moradores: [{ nome: "LUIS GUSTAVO PALADINO DE SOUZA", tel: "11999784289" }] },
 "Collection133": { pin: "4059", moradores: [{ nome: "JORGE MOREIRA MACHADO", tel: "51981114000" }, { nome: "SIMONE CANSI", tel: "11997668080" }] },
-"Collection134": { pin: "5160", moradores: [{ nome: "NILTON RAFFA", tel: "11963057039" }] },
+"Collection134": { pin: "5160", moradores: [{ nome: "AMANDA", tel: "11992636556" }, { nome: "NILTON RAFFA", tel: "11963057039" }] },
 "Collection141": { pin: "6271", moradores: [{ nome: "WESLEY CALCIN", tel: "11973351202" }] },
 "Collection142": { pin: "7382", moradores: [{ nome: "MARCOS GUISELINI", tel: "11963677285" }] },
 "Collection143": { pin: "8493", moradores: [{ nome: "BRUNA ALARCON ZAMBELLI", tel: "11973227322" }, { nome: "MARCIO URZE ZAMBELLI", tel: "11976200078" }] },
