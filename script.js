@@ -26,7 +26,7 @@ const agendaMoradores = {
 "Collection51": { pin: "7492", moradores: [{ nome: "RENATO QUIDIQUIMO", tel: "11948558000" }] },
 "Collection53": { pin: "8531", moradores: [{ nome: "EDGAR ALMEIDA", tel: "11967627311" }, { nome: "BERENICE FRANCO", tel: "11980306352" }] },
 "Collection54": { pin: "9640", moradores: [{ nome: "CRISTINA DRAGO", tel: "11949768974" }] },
-"Collection61": { pin: "1058", moradores: [{ nome: "VANDERLEI XAVIER DE SOUZA", tel: "11917303310" }] },
+"Collection61": { pin: "1058", moradores: [{ nome: "VANDERLEI XAVIER DE SOUZA", tel: "11917303310" }, { nome: "THALITA XAVIER", tel: "11969155876" }] },
 "Collection62": { pin: "2169", moradores: [{ nome: "CARLA TAKACS", tel: "11999709958" }, { nome: "MARCO TAKACS", tel: "11999709958" }] },
 "Collection63": { pin: "3275", moradores: [{ nome: "ALEXANDRE FERNANDES", tel: "11993302727" }, { nome: "CLEIDE RUFFINO DOS SANTOS", tel: "11997822681" }] },
 "Collection64": { pin: "4386", moradores: [{ nome: "KLEBER ROGERIO VALADAR", tel: "11989927680" }, { nome: "CRISMILENE", tel: "11989927680" }] },
