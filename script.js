@@ -69,7 +69,7 @@ const agendaMoradores = {
 "Collection161": { pin: "5059", moradores: [{ nome: "ELIO LOURENCO BOLZANI", tel: "11993498037" }] },
 "Collection162": { pin: "6160", moradores: [{ nome: "JOAO PAULO MELO", tel: "11996775256" }] },
 "Collection163": { pin: "7271", moradores: [{ nome: "JOELCIO FIORIN", tel: "11970147401" }, { nome: "PEDRO VINICIUS GOMES", tel: "71986098172" }] },
-"Collection164": { pin: "8382", moradores: [{ nome: "ANA PAULA FRIOLI", tel: "11966595078" }, { nome: "MARCIO FRIOLI", tel: "11982807935" }] },
+"Collection164": { pin: "8382", moradores: [{ nome: "DANIELA BATISTA", tel: "11983401494" }] },
 "Collection171": { pin: "9493", moradores: [{ nome: "SILVIO MARCEL PIRES", tel: "11962146497" }] },
 "Collection172": { pin: "1504", moradores: [{ nome: "ERIKA CAVICCHIO", tel: "11984697804" }] },
 "Collection173": { pin: "2615", moradores: [{ nome: "JOAO MORAES", tel: "11947576463" }] },
