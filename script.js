@@ -34,7 +34,7 @@ const agendaMoradores = {
 "Collection71": { pin: "5497", moradores: [{ nome: "MARCOS CALCIC", tel: "11996695585" }, { nome: "MILENA LULUSKI VIEIRA", tel: "11999018674" }] },
 "Collection72": { pin: "6503", moradores: [{ nome: "MARCEL GALLO", tel: "11983575109" }] },
 "Collection73": { pin: "7614", moradores: [{ nome: "RAIZA RINALDI", tel: "11965369976" }, { nome: "THIAGO NASCIMENTO RINALDI", tel: "11981990759" }] },
-"Collection74": { pin: "7614", moradores: [{ nome: "MARIA APARECIDA", tel: "11981245500" }] },
+"Collection74": { pin: "5842", moradores: [{ nome: "MARIA APARECIDA", tel: "11981245500" }] },
 "Collection81": { pin: "9836", moradores: [{ nome: "JOSE RENATO ANTUNES", tel: "11983666675" }, { nome: "KELLI MERICO DA SILVA", tel: "11981144080" }] },
 "Collection82": { pin: "1947", moradores: [{ nome: "FILOMENA ZIMMERMANN", tel: "11991246491" }, { nome: "GABRIELA ZIMMERMANN", tel: "11976222335" }, { nome: "MARINA ZIMMERMANN", tel: "11992223953" }, { nome: "TAIS CRISTINA BEZERRA DE OLIVEIRA", tel: "11991246491" }] },
 "Collection83": { pin: "2059", moradores: [{ nome: "TALITA MASSAIA", tel: "11997864434" }] },
