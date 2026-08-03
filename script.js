@@ -7,7 +7,7 @@ const CONFIG = {
 
 // ================= AGENDA COM PIN E MORADORES =================
 const agendaMoradores = {
-"Collection11": { pin: "8456", moradores: [{ nome: "LUIS FERNANDO FERREIRA", tel: "11982580397" }, { nome: "PATRICIA SALLES GOMES", tel: "11974577723" }] },
+"Collection11": { pin: "8456", moradores: [{ nome: "LUIS FERNANDO FERREIRA", tel: "11982580397" }, { nome: "PATRICIA SALLES GOMES", tel: "11943201183" }] },
 "Collection12": { pin: "1932", moradores: [{ nome: "IGOR FREITAS", tel: "11992929162" }, { nome: "TAMIRIS XAVIER", tel: "11974110101" }] },
 "Collection13": { pin: "2745", moradores: [{ nome: "TING YUK KIN", tel: "11991850760" }] },
 "Collection14": { pin: "3581", moradores: [{ nome: "ANDERSON FELIPE RODRIGUES", tel: "11972506558" }, { nome: "BERNADETE DALA COSTA", tel: "11947452187" }, { nome: "FELIPE DALA RODRIGUES", tel: "11972506558" }, { nome: "LEILIANE DALA", tel: "11947452187" }, { nome: "VINICIUS DALA", tel: "11972506558" }] },
